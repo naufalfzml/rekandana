@@ -9,7 +9,7 @@
         @csrf
         <input type="hidden" name="role" value="mahasiswa">
 
-        <h2 class="text-2xl font-bold mb-1">Daftar sebagai Pengaju Proposal</h2>
+        <h2 class="text-2xl font-bold mb-1">Daftar sebagai Penyelenggara Acara</h2>
         <p class="text-gray-600 mb-6">Lengkapi data diri Anda untuk membuat akun.</p>
 
         <div>

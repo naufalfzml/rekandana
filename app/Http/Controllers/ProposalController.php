@@ -32,6 +32,11 @@ class ProposalController extends Controller
             'description' => 'required|string',
             'funding_goal' => 'nullable|numeric',
             'proposal_file' => 'required|file|mimes:pdf,doc,docx|max:5120', // Maks 5MB
+            'kategori' => 'required|string',
+            'bidang' => 'required|string',
+            'tanggal_acara' => 'required|date',
+            'penyelenggara' => 'required|string',
+            'link_sosmed' => 'nullable|string'
         ]);
 
         $filePath = $request->file('proposal_file')->store('proposals', 'public');
@@ -42,7 +47,12 @@ class ProposalController extends Controller
             'description' => $request->description,
             'funding_goal' => $request->funding_goal,
             'file_path' => $filePath,
-            'status' => 'pending',
+            'status' => 'pending', 
+            'kategori' => $request->kategori,
+            'bidang' => $request->bidang,
+            'tanggal_acara' => $request->tanggal_acara,
+            'penyelenggara' => $request->penyelenggara,
+            'link_sosmed' => $request->link_sosmed
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Proposal berhasil diajukan dan sedang direview.');
@@ -85,4 +95,4 @@ class ProposalController extends Controller
 
         return view('sponsor.proposal.saved', compact('proposals'));
     }
-}
+} 

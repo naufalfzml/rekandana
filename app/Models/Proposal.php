@@ -12,7 +12,12 @@ class Proposal extends Model
         'description', 
         'funding_goal',
         'file_path',
-        'status' 
+        'status',
+        'kategori',
+        'bidang',
+        'penyelenggara',
+        'tanggal_acara',
+        'link_sosmed'
     ];
 
     public function user() {
