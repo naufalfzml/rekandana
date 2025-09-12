@@ -20,15 +20,16 @@
 
                     <div class="space-y-4">
                         @forelse ($pendingProposals as $proposal)
-                            <div class="border p-4 rounded-lg flex flex-col sm:flex-row justify-between sm:items-center">
+                            <div x-data="{ modalOpen : false }" class="border p-4 rounded-lg flex flex-col sm:flex-row justify-between sm:items-center">
                                 <!-- Info Proposal -->
                                 <div class="mb-4 sm:mb-0">
                                     <p class="font-bold text-lg">{{ $proposal->title }}</p>
                                     <p class="text-sm text-gray-600">Oleh: {{ $proposal->user->name }} ({{ $proposal->user->university }})</p>
-                                    <a href="{{ asset('storage/' . $proposal->file_path) }}" target="_blank" class="text-sm text-indigo-600 hover:underline">
-                                        Lihat Dokumen Proposal
-                                    </a>
+                                    <button @click="modalOpen = true" class="rounded-sm block text-sm mt-2 hover:underline text-blue-500">
+                                        Lihat Detail
+                                    </button>
                                 </div>
+                                
                                 <!-- Tombol Aksi -->
                                 <div class="flex gap-2 flex-shrink-0">
                                     <form action="{{ route('admin.proposals.approve', $proposal) }}" method="POST">
@@ -41,6 +42,41 @@
                                         @method('PUT')
                                         <button type="submit" class="px-3 py-2 bg-red-500 text-white text-sm font-semibold rounded hover:bg-red-600 w-full sm:w-auto">Reject</button>
                                     </form>
+                                </div>
+
+                                <div x-show="modalOpen" 
+                                     style="display:none;" 
+                                     x-on:keydown.escape.window="modalOpen = false"
+                                     class="fixed inset-0 z-50 flex items-center justify-center p-4">
+
+                                     <!-- Background Gelap (Overlay) -->
+                                     <div x-show="modalOpen" x.transition.opacity @click="modalOpen = false" class="fixed inset-0 bg-black bg-opacity-50"></div>
+                                     
+                                     <!-- Konten Popup -->
+                                     <div x-show="modalOpen" x-transition"
+                                          @click.outside="modalOPen = false"
+                                          class="relative bg-white rounded-md shadow-xl w-full max-w-2xl p-6 md:p-8">
+
+                                          <h2 class="text-2xl text-center font-bold">{{ $proposal->title }}</h2>
+
+                                          <div>
+                                            <p><strong>Pengaju:</strong> {{ $proposal->user->name }}</p>
+                                            <p><strong>Kategori:</strong> {{ $proposal->kategori }}</p>
+                                            <p><strong>Bidang:</strong> {{ $proposal->bidang }}</p>
+                                            <p><strong>Tanggal Acara:</strong> {{ $proposal->tanggal_acara }}</p>
+                                            <p><strong>Penyelenggara:</strong> {{ $proposal->penyelenggara }}</p>
+                                            <p><strong>Deskripsi:</strong> {{ $proposal->description }}</p>
+                                            <p><strong>Target Dana:</strong> Rp {{ number_format($proposal->funding_goal) }}</p>
+                                            <p><strong>Link Sosial Media:</strong> <a href="{{ $proposal->link_sosmed }}" target="_blank">{{ $proposal->link_sosmed }}</a></p>
+                                          </div>
+
+                                          <div>
+                                            <a href="{{ asset('storage/' . $proposal->file_path) }}" target="_blank" class="text-md text-indigo-600 hover:underline">
+                                                Lihat Dokumen Proposal
+                                            </a>
+                                          </div>
+                                    </div>
+
                                 </div>
                             </div>
                         @empty
