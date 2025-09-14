@@ -53,31 +53,163 @@
                                      <div x-show="modalOpen" x.transition.opacity @click="modalOpen = false" class="fixed inset-0 bg-black bg-opacity-50"></div>
                                      
                                      <!-- Konten Popup -->
-                                     <div x-show="modalOpen" x-transition"
-                                          @click.outside="modalOPen = false"
-                                          class="relative bg-white rounded-md shadow-xl w-full max-w-2xl p-6 md:p-8">
+                                     <div x-show="modalOpen" x-transition
+                                          @click.outside="modalOpen = false"
+                                          class="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
 
-                                          <h2 class="text-2xl text-center font-bold">{{ $proposal->title }}</h2>
-
-                                          <div>
-                                            <p><strong>Pengaju:</strong> {{ $proposal->user->name }}</p>
-                                            <p><strong>Kategori:</strong> {{ $proposal->kategori }}</p>
-                                            <p><strong>Bidang:</strong> {{ $proposal->bidang }}</p>
-                                            <p><strong>Tanggal Acara:</strong> {{ $proposal->tanggal_acara }}</p>
-                                            <p><strong>Penyelenggara:</strong> {{ $proposal->penyelenggara }}</p>
-                                            <p><strong>Deskripsi:</strong> {{ $proposal->description }}</p>
-                                            <p><strong>Target Dana:</strong> Rp {{ number_format($proposal->funding_goal) }}</p>
-                                            <p><strong>Link Sosial Media:</strong> <a href="{{ $proposal->link_sosmed }}" target="_blank">{{ $proposal->link_sosmed }}</a></p>
+                                          <!-- Modal Header -->
+                                          <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+                                              <div class="flex items-center justify-between">
+                                                  <h2 class="text-xl font-bold text-white text-center w-full">{{ $proposal->title }}</h2>
+                                                  <button @click="modalOpen = false" 
+                                                          class="text-white hover:text-gray-200 transition-colors duration-200">
+                                                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                      </svg>
+                                                  </button>
+                                              </div>
                                           </div>
 
-                                          <div>
-                                            <a href="{{ asset('storage/' . $proposal->file_path) }}" target="_blank" class="text-md text-indigo-600 hover:underline">
-                                                Lihat Dokumen Proposal
-                                            </a>
-                                          </div>
-                                    </div>
+                                          <!-- Modal Body -->
+                                          <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+                                              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                                  
+                                                  <!-- Left Column - Basic Info -->
+                                                  <div class="space-y-4">
+                                                      <div class="bg-gray-50 rounded-lg p-4">
+                                                          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                              <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                              </svg>
+                                                              Informasi Pengaju
+                                                          </h3>
+                                                          <div class="space-y-2">
+                                                              <div class="flex justify-between">
+                                                                  <span class="text-gray-600">Nama:</span>
+                                                                  <span class="font-medium">{{ $proposal->user->name }}</span>
+                                                              </div>
+                                                              <div class="flex justify-between">
+                                                                  <span class="text-gray-600">Universitas:</span>
+                                                                  <span class="font-medium">{{ $proposal->user->university }}</span>
+                                                              </div>
+                                                          </div>
+                                                      </div>
 
+                                                      <div class="bg-gray-50 rounded-lg p-4">
+                                                          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                              <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                                              </svg>
+                                                              Kategori & Bidang
+                                                          </h3>
+                                                          <div class="space-y-2">
+                                                              <div class="flex justify-between">
+                                                                  <span class="text-gray-600">Kategori:</span>
+                                                                  <span class="font-medium">{{ $proposal->kategori }}</span>
+                                                              </div>
+                                                              <div class="flex justify-between">
+                                                                  <span class="text-gray-600">Bidang:</span>
+                                                                  <span class="font-medium">{{ $proposal->bidang }}</span>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="bg-gray-50 rounded-lg p-4">
+                                                          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                              <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                              </svg>
+                                                              Detail Acara
+                                                          </h3>
+                                                          <div class="space-y-2">
+                                                              <div class="flex justify-between">
+                                                                  <span class="text-gray-600">Tanggal:</span>
+                                                                  <span class="font-medium">{{ $proposal->tanggal_acara }}</span>
+                                                              </div>
+                                                              <div class="flex justify-between">
+                                                                  <span class="text-gray-600">Penyelenggara:</span>
+                                                                  <span class="font-medium">{{ $proposal->penyelenggara }}</span>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+
+                                                  <!-- Right Column - Description & Funding -->
+                                                  <div class="space-y-4">
+                                                      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4">
+                                                          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                              <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                              </svg>
+                                                              Deskripsi Proposal
+                                                          </h3>
+                                                          <p class="text-gray-700 leading-relaxed">{{ $proposal->description }}</p>
+                                                      </div>
+
+                                                      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4">
+                                                          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                              <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                                              </svg>
+                                                              Target Pendanaan
+                                                          </h3>
+                                                          <div class="text-center">
+                                                              <span class="text-2xl font-bold text-green-600">Rp {{ number_format($proposal->funding_goal) }}</span>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="bg-gray-50 rounded-lg p-4">
+                                                          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                              <svg class="w-5 h-5 mr-2 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                                                              </svg>
+                                                              Link Sosial Media
+                                                          </h3>
+                                                          @php
+                                                              $socialLink = $proposal->link_sosmed;
+                                                              // Pastikan URL memiliki protocol
+                                                              if (!empty($socialLink) && !str_starts_with($socialLink, 'http://') && !str_starts_with($socialLink, 'https://')) {
+                                                                  $socialLink = 'https://' . $socialLink;
+                                                              }
+                                                          @endphp
+                                                          @if(!empty($socialLink))
+                                                              <a href="{{ $socialLink }}" 
+                                                                 target="_blank" 
+                                                                 rel="noopener noreferrer"
+                                                                 class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                                                                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                                                  </svg>
+                                                                  {{ $proposal->link_sosmed }}
+                                                              </a>
+                                                          @else
+                                                              <span class="text-gray-500 italic">Tidak ada link sosial media</span>
+                                                          @endif
+                                                      </div>
+                                                  </div>
+                                              </div>
+
+                                              <!-- Document Section -->
+                                              <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4">
+                                                  <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                      <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                      </svg>
+                                                      Dokumen Proposal
+                                                  </h3>
+                                                  <a href="{{ asset('storage/' . $proposal->file_path) }}" 
+                                                     target="_blank" 
+                                                     class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200">
+                                                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                      </svg>
+                                                      Lihat Dokumen Proposal
+                                                  </a>
+                                              </div>
+                                          </div>
+                                     </div>
                                 </div>
+
                             </div>
                         @empty
                             <p class="text-gray-500">Tidak ada proposal yang menunggu persetujuan saat ini.</p>

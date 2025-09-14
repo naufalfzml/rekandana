@@ -19,7 +19,7 @@ class ProposalController extends Controller
     public function create()
     {
         $this->authorize('create', Proposal::class);
-        // Pastikan hanya mahasiswa yg bisa akses halaman ini
+        // hanya mahasiswa yg bisa akses halaman ini
         if (auth()->user()->role !== 'mahasiswa') {
             abort(403);
         }
@@ -58,7 +58,7 @@ class ProposalController extends Controller
         return redirect()->route('dashboard')->with('success', 'Proposal berhasil diajukan dan sedang direview.');
     }
 
-    //Untuk menambahkan proposal ke daftar minat
+    //Untuk menambahkan proposal ke daftar minat (Sponsor)
     public function save(Proposal $proposal) {
         auth()->user()->savedProposals()->attach($proposal->id);
         return back()->with('success', 'Proposal disimpan ke daftar minat');
@@ -88,11 +88,40 @@ class ProposalController extends Controller
         return view('sponsor.proposal.show', compact('proposal'));
     }
 
-    //Menampilkan daftar proposal yang disimpan oleh sponsor.
+    //Menampilkan daftar proposal yang disimpan oleh sponsor
     public function saved()
     {
         $proposals = auth()->user()->savedProposals()->latest()->paginate(10);
 
         return view('sponsor.proposal.saved', compact('proposals'));
     }
+
+    //Search Proposal (Sponsor)
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        if($search) {
+            $proposals = Proposal::where('status', 'approved')
+                ->where(function($query) use ($search) {
+                    $query->where('title', 'like', "%$search%")
+                    ->orWhere("description", "like","%$search")
+                    ->orWhere('kategori', 'like', "%$search%")
+                    ->orWhere('bidang', 'like', "%$search%")
+                    ->orWhere('penyelenggara', 'like', "%$search%");
+                })
+                ->latest()
+                ->paginate(10);
+        } else {
+            $proposals = Proposal::where('status', 'approved')->latest()->paginate(10);
+        }
+        
+        return view('sponsor.proposal.index', compact ('proposals'));
+    }
+
+    public function direct(Request $request) {
+        return view('sponsor.proposal.direct');
+    }
+
+    
 } 

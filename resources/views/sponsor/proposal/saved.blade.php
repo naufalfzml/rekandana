@@ -12,7 +12,7 @@
                     <x-proposal-card :proposal="$proposal" />
                 @empty
                     <div class="col-span-full text-center py-12">
-                        <p class="text-gray-600">Kamu belum menyimpan proposal apapun.</p>
+                        <p class="text-gray-600">Anda belum menyimpan proposal apapun.</p>
                         <a href="{{ route('sponsor.proposals.index') }}" class="mt-2 text-indigo-600 font-semibold hover:underline">
                             Mulai cari proposal sekarang!
                         </a>

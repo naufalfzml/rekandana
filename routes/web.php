@@ -41,7 +41,9 @@ Route::middleware(['auth', 'verified', 'mahasiswa'])->prefix('mahasiswa')->name(
 //ROUTES KHUSUS UNTUK SPONSOR
 Route::middleware(['auth', 'verified', 'sponsor'])->prefix('sponsor')->name('sponsor.')->group(function() {
     Route::get('/proposals', [ProposalController::class, 'index'])->name('proposals.index');
-    Route::get('/proposals/saved', [ProposalController::class, 'saved'])->name('proposals.saved'); // <-- TAMBAHKAN INI
+    Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
+    Route::get('/proposals/direct', [ProposalController::class, 'direct'])->name('proposals.direct' );
+    Route::get('/proposals/saved', [ProposalController::class, 'saved'])->name('proposals.saved');
     Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
     Route::post('/proposals/{proposal}/save', [ProposalController::class, 'save'])->name('proposals.save');
     Route::delete('/proposals/{proposal}/unsave', [ProposalController::class, 'unsave'])->name('proposals.unsave');

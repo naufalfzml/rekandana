@@ -20,7 +20,6 @@
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-
                         @if(auth()->user()->role === 'mahasiswa')
                             <x-nav-link :href="route('mahasiswa.proposals.create')" :active="request()->routeIs('proposals.create')">
                                 Ajukan Proposal
@@ -31,6 +30,9 @@
                         @elseif(auth()->user()->role === 'sponsor')
                             <x-nav-link :href="route('sponsor.proposals.index')" :active="request()->routeIs('sponsor.proposals.index')">
                                 Cari Proposal
+                            </x-nav-link>
+                            <x-nav-link :href="route('sponsor.proposals.direct')" :active="request()->routeIs('sponsor.proposals.direct')">
+                                Direct Proposal
                             </x-nav-link>
                             <x-nav-link :href="route('sponsor.proposals.saved')" :active="request()->routeIs('sponsor.proposals.saved')">
                                 Disimpan
