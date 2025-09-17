@@ -77,6 +77,17 @@
                             <x-text-input id="link_sosmed" name="link_sosmed" type="text" class="mt-1 block w-full" :value="old('link_sosmed')" />
                             <x-input-error class="mt-2" :messages="$errors->get('link_sosmed')" />
                         </div>
+                    <!-- Taruh di dalam <form> -->
+                        <div>
+                            <x-input-label for="target_sponsor_id" value="Kirim Langsung ke Perusahaan (Opsional)" />
+                            <select id="target_sponsor_id" name="target_sponsor_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                <option value="">Tidak, kirim ke semua sponsor (Umum)</option>
+                                @foreach($sponsors as $sponsor)
+                                    <option value="{{ $sponsor->id }}">{{ $sponsor->company_name ?? $sponsor->name }}</option>
+                                @endforeach
+                            </select>
+                            <p class="mt-1 text-sm text-gray-500">Jika tidak dipilih, proposal akan masuk ke daftar umum.</p>
+                        </div>
                         
                         <div class="flex items-center gap-4">
                             <x-primary-button>Ajukan Proposal</x-primary-button>

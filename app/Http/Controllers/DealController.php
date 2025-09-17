@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Deal;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use App\Notifications\NewDealInitiated;
 
 class DealController extends Controller
 {

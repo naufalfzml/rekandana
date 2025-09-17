@@ -63,4 +63,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function savedProposals() {
         return $this->belongsToMany(Proposal::class,'saved_proposals');
     }
+    
+    public function receivedInvitations() {
+        return $this->hasMany(ProposalInvitation::class, 'sponsor_id');
+    }
 }

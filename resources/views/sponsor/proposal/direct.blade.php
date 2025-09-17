@@ -67,126 +67,128 @@
 
             <!-- Proposals List -->
             <div class="space-y-4">
-                @forelse($directProposals as $proposal)
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200 proposal-card" 
-                         data-proposal-id="{{ $proposal->id }}"
-                         data-status="{{ $proposal->pivot->status ?? 'pending' }}"
-                         data-category="{{ $proposal->kategori }}"
-                         data-title="{{ strtolower($proposal->title) }}"
-                         data-student="{{ strtolower($proposal->user->name) }}"
-                         data-university="{{ strtolower($proposal->user->university) }}">
-                        
-                        <div class="p-6">
-                            <div class="flex items-start justify-between">
-                                <!-- Left Content -->
-                                <div class="flex-1">
-                                    <div class="flex items-start space-x-4">
-                                        <!-- Status Badge -->
-                                        <div class="flex-shrink-0">
-                                            @php
-                                                $status = $proposal->pivot->status ?? 'pending';
-                                                $statusColors = [
-                                                    'pending' => 'bg-yellow-100 text-yellow-800',
-                                                    'reviewed' => 'bg-blue-100 text-blue-800',
-                                                    'interested' => 'bg-green-100 text-green-800',
-                                                    'not_interested' => 'bg-red-100 text-red-800'
-                                                ];
-                                                $statusLabels = [
-                                                    'pending' => 'Menunggu Review',
-                                                    'reviewed' => 'Sudah Direview',
-                                                    'interested' => 'Tertarik',
-                                                    'not_interested' => 'Tidak Tertarik'
-                                                ];
-                                            @endphp
-                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $statusColors[$status] }}">
-                                                {{ $statusLabels[$status] }}
-                                            </span>
-                                        </div>
-                                        
-                                        <!-- Proposal Info -->
-                                        <div class="flex-1">
-                                            <h3 class="text-lg font-semibold text-gray-800 mb-2">
-                                                <a href="#" class="hover:text-blue-600 transition-colors duration-200 view-proposal-detail" 
-                                                   data-proposal-id="{{ $proposal->id }}">
-                                                    {{ $proposal->title }}
-                                                </a>
-                                            </h3>
+                @forelse($directProposals as $invitation)
+                    @if($invitation->proposal && $invitation->proposal->user)
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200 proposal-card" 
+                             data-proposal-id="{{ $invitation->proposal->id }}"
+                             data-status="{{ $invitation->status ?? 'pending' }}"
+                             data-category="{{ $invitation->proposal->kategori }}"
+                             data-title="{{ strtolower($invitation->proposal->title) }}"
+                             data-student="{{ strtolower($invitation->proposal->user->name) }}"
+                             data-university="{{ strtolower($invitation->proposal->user->university ?? '') }}">
+                            
+                            <div class="p-6">
+                                <div class="flex items-start justify-between">
+                                    <!-- Left Content -->
+                                    <div class="flex-1">
+                                        <div class="flex items-start space-x-4">
+                                            <!-- Status Badge -->
+                                            <div class="flex-shrink-0">
+                                                @php
+                                                    $status = $invitation->status ?? 'pending';
+                                                    $statusColors = [
+                                                        'pending' => 'bg-yellow-100 text-yellow-800',
+                                                        'reviewed' => 'bg-blue-100 text-blue-800',
+                                                        'interested' => 'bg-green-100 text-green-800',
+                                                        'not_interested' => 'bg-red-100 text-red-800'
+                                                    ];
+                                                    $statusLabels = [
+                                                        'pending' => 'Menunggu Review',
+                                                        'reviewed' => 'Sudah Direview',
+                                                        'interested' => 'Tertarik',
+                                                        'not_interested' => 'Tidak Tertarik'
+                                                    ];
+                                                @endphp
+                                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $statusColors[$status] }}">
+                                                    {{ $statusLabels[$status] }}
+                                                </span>
+                                            </div>
                                             
-                                            <!-- Student Info -->
-                                            <div class="flex items-center mb-3">
-                                                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-3">
-                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                            <!-- Proposal Info -->
+                                            <div class="flex-1">
+                                                <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                                                    <a href="#" class="hover:text-blue-600 transition-colors duration-200 view-proposal-detail" 
+                                                       data-proposal-id="{{ $invitation->proposal->id }}">
+                                                        {{ $invitation->proposal->title }}
+                                                    </a>
+                                                </h3>
+                                                
+                                                <!-- Student Info -->
+                                                <div class="flex items-center mb-3">
+                                                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-3">
+                                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <p class="font-medium text-gray-800">{{ $invitation->proposal->user->name }}</p>
+                                                        <p class="text-sm text-gray-600">{{ $invitation->proposal->user->university ?? 'Universitas tidak tersedia' }}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Tags -->
+                                                <div class="flex flex-wrap gap-2 mb-3">
+                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                        {{ $invitation->proposal->kategori }}
+                                                    </span>
+                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                        {{ $invitation->proposal->bidang }}
+                                                    </span>
+                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                        {{ $invitation->proposal->tanggal_acara }}
+                                                    </span>
+                                                </div>
+                                                
+                                                <!-- Description -->
+                                                <p class="text-gray-600 text-sm line-clamp-2 mb-3">
+                                                    {{ $invitation->proposal->description }}
+                                                </p>
+                                                
+                                                <!-- Funding Goal -->
+                                                <div class="flex items-center text-sm">
+                                                    <svg class="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                                     </svg>
+                                                    <span class="font-semibold text-green-600">
+                                                        Rp {{ number_format($invitation->proposal->funding_goal, 0, ',', '.') }}
+                                                    </span>
+                                                    <span class="text-gray-500 ml-2">•</span>
+                                                    <span class="text-gray-500 ml-2">
+                                                        Dikirim {{ $invitation->created_at->diffForHumans() }}
+                                                    </span>
                                                 </div>
-                                                <div>
-                                                    <p class="font-medium text-gray-800">{{ $proposal->user->name }}</p>
-                                                    <p class="text-sm text-gray-600">{{ $proposal->user->university }}</p>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- Tags -->
-                                            <div class="flex flex-wrap gap-2 mb-3">
-                                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                                    {{ $proposal->kategori }}
-                                                </span>
-                                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                    {{ $proposal->bidang }}
-                                                </span>
-                                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                                    {{ $proposal->tanggal_acara }}
-                                                </span>
-                                            </div>
-                                            
-                                            <!-- Description -->
-                                            <p class="text-gray-600 text-sm line-clamp-2 mb-3">
-                                                {{ $proposal->description }}
-                                            </p>
-                                            
-                                            <!-- Funding Goal -->
-                                            <div class="flex items-center text-sm">
-                                                <svg class="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                                                </svg>
-                                                <span class="font-semibold text-green-600">
-                                                    Rp {{ number_format($proposal->funding_goal, 0, ',', '.') }}
-                                                </span>
-                                                <span class="text-gray-500 ml-2">•</span>
-                                                <span class="text-gray-500 ml-2">
-                                                    Dikirim {{ $proposal->pivot->created_at->diffForHumans() ?? $proposal->created_at->diffForHumans() }}
-                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Right Actions -->
-                                <div class="flex flex-col space-y-2 ml-6">
-                                    <button class="view-proposal-detail px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                                            data-proposal-id="{{ $proposal->id }}">
-                                        <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                        </svg>
-                                        Lihat Detail
-                                    </button>
                                     
-                                    @if(($proposal->pivot->status ?? 'pending') === 'pending')
-                                        <div class="flex space-x-2">
-                                            <button class="mark-interested px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition-colors duration-200"
-                                                    data-proposal-id="{{ $proposal->id }}">
-                                                Tertarik
-                                            </button>
-                                            <button class="mark-not-interested px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors duration-200"
-                                                    data-proposal-id="{{ $proposal->id }}">
-                                                Tidak
-                                            </button>
-                                        </div>
-                                    @endif
+                                    <!-- Right Actions -->
+                                    <div class="flex flex-col space-y-2 ml-6">
+                                        <button class="view-proposal-detail px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                                                data-proposal-id="{{ $invitation->proposal->id }}">
+                                            <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                            Lihat Detail
+                                        </button>
+                                        
+                                        @if(($invitation->status ?? 'pending') === 'pending')
+                                            <div class="flex space-x-2">
+                                                <button class="mark-interested px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition-colors duration-200"
+                                                        data-invitation-id="{{ $invitation->id }}">
+                                                    Tertarik
+                                                </button>
+                                                <button class="mark-not-interested px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors duration-200"
+                                                        data-invitation-id="{{ $invitation->id }}">
+                                                    Tidak
+                                                </button>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @empty
                     <!-- Empty State -->
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -321,8 +323,6 @@
 
             // Modal functionality
             function openModal(proposalId) {
-                // Here you would typically fetch proposal details via AJAX
-                // For now, we'll show a placeholder
                 modalTitle.textContent = 'Detail Proposal';
                 modalContent.innerHTML = `
                     <div class="text-center py-8">
@@ -341,45 +341,18 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <p class="text-sm text-gray-600">Nama</p>
-                                        <p class="font-medium">John Doe</p>
+                                        <p class="font-medium">Proposal ID: ${proposalId}</p>
                                     </div>
                                     <div>
                                         <p class="text-sm text-gray-600">Universitas</p>
-                                        <p class="font-medium">Universitas Indonesia</p>
+                                        <p class="font-medium">Data akan dimuat dari database</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="bg-blue-50 rounded-lg p-4">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-3">Detail Proposal</h3>
-                                <div class="space-y-3">
-                                    <div>
-                                        <p class="text-sm text-gray-600">Kategori</p>
-                                        <p class="font-medium">Teknologi</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Bidang</p>
-                                        <p class="font-medium">AI & Machine Learning</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Tanggal Acara</p>
-                                        <p class="font-medium">2024-03-15</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Target Dana</p>
-                                        <p class="font-medium text-green-600">Rp 50.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-purple-50 rounded-lg p-4">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Deskripsi</h3>
-                                <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            
-                            <div class="bg-yellow-50 rounded-lg p-4">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Pesan Kustom</h3>
-                                <p class="text-gray-700 italic">"Kami percaya proposal ini sangat sesuai dengan visi dan misi perusahaan Anda dalam mendukung inovasi teknologi."</p>
+                                <p class="text-gray-700">Detail lengkap proposal akan ditampilkan di sini.</p>
                             </div>
                         </div>
                     `;
@@ -412,23 +385,29 @@
             // Action buttons
             document.querySelectorAll('.mark-interested').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const proposalId = this.dataset.proposalId;
-                    // Here you would send a request to mark as interested
+                    const invitationId = this.dataset.invitationId;
                     alert('Proposal ditandai sebagai tertarik!');
-                    // Update UI
-                    this.closest('.proposal-card').querySelector('.bg-yellow-100').className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800';
-                    this.closest('.proposal-card').querySelector('.bg-yellow-100').textContent = 'Tertarik';
+                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100');
+                    if (statusBadge) {
+                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800';
+                        statusBadge.textContent = 'Tertarik';
+                    }
+                    this.parentElement.style.display = 'none';
                 });
             });
 
             document.querySelectorAll('.mark-not-interested').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const proposalId = this.dataset.proposalId;
+                    const invitationId = this.dataset.invitationId;
                     // Here you would send a request to mark as not interested
                     alert('Proposal ditandai sebagai tidak tertarik.');
                     // Update UI
-                    this.closest('.proposal-card').querySelector('.bg-yellow-100').className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800';
-                    this.closest('.proposal-card').querySelector('.bg-yellow-100').textContent = 'Tidak Tertarik';
+                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100');
+                    if (statusBadge) {
+                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800';
+                        statusBadge.textContent = 'Tidak Tertarik';
+                    }
+                    this.parentElement.style.display = 'none';
                 });
             });
         });

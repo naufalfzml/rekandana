@@ -31,4 +31,8 @@ class Proposal extends Model
     public function deals() {
         return $this->hasMany(Deal::class);
     }
+
+    public function invitations() {
+        return $this->hasMany(ProposalInvitation::class);
+    }
 }

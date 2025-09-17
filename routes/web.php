@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RoleSelectionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DealController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SponsorController;
 
 Route::get('/', function () {
     return view('landing');
@@ -42,7 +43,8 @@ Route::middleware(['auth', 'verified', 'mahasiswa'])->prefix('mahasiswa')->name(
 Route::middleware(['auth', 'verified', 'sponsor'])->prefix('sponsor')->name('sponsor.')->group(function() {
     Route::get('/proposals', [ProposalController::class, 'index'])->name('proposals.index');
     Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
-    Route::get('/proposals/direct', [ProposalController::class, 'direct'])->name('proposals.direct' );
+    Route::get('/proposals/direct', [SponsorController::class, 'direct'])->name('proposals.direct' );
+    Route::get('/proposals/direct/{direct}', [SponsorController::class, 'showDirect'])->name('proposals.direct.show');
     Route::get('/proposals/saved', [ProposalController::class, 'saved'])->name('proposals.saved');
     Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
     Route::post('/proposals/{proposal}/save', [ProposalController::class, 'save'])->name('proposals.save');
