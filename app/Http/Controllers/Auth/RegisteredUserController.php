@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\ReferralCode;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,6 +61,7 @@ class RegisteredUserController extends Controller
             ]);
         } elseif ($role === 'sponsor') {
             $request->validate([
+                'referral_code' => ['required', 'string', 'exists:referral_codes,code'],
                 'name' => ['required', 'string', 'max:255'],
                 'company_name' => ['required', 'string', 'max:255'],
                 'company_address' => ['required', 'string'],
@@ -70,6 +72,15 @@ class RegisteredUserController extends Controller
                 'logo' => ['nullable', 'file', 'mimes:png,jpg,svg', 'max:2048'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
+
+            // Validasi kode referral
+            $referralCode = ReferralCode::where('code', $request->referral_code)->first();
+
+            if (!$referralCode || !$referralCode->isValid()) {
+                return back()->withErrors([
+                    'referral_code' => 'Kode referral tidak valid, sudah expired, atau sudah mencapai batas penggunaan.'
+                ])->withInput();
+            }
         } else {
             // Jika role tidak valid, kembalikan ke halaman pilihan
             return redirect()->route('register');
@@ -92,6 +103,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $role,
+            'referral_code_id' => $role === 'sponsor' ? $referralCode->id : null,
             'university' => $request->university,
             'nim' => $request->nim,
             'ktm_path' => $ktmPath,
@@ -101,6 +113,11 @@ class RegisteredUserController extends Controller
             'website' => $request->website,
             'logo_path' => $logoPath,
         ]);
+
+        // Increment usage count untuk referral code jika sponsor
+        if ($role === 'sponsor' && isset($referralCode)) {
+            $referralCode->incrementUsage();
+        }
 
         event(new Registered($user));
 

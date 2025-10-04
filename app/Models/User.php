@@ -18,10 +18,11 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var list<string>
      */
     protected $fillable = [
-        'name', 
+        'name',
         'email',
         'password',
         'role',
+        'referral_code_id',
         'university',
         'nim',
         'ktm_path',
@@ -66,5 +67,9 @@ class User extends Authenticatable implements MustVerifyEmail
     
     public function receivedInvitations() {
         return $this->hasMany(ProposalInvitation::class, 'sponsor_id');
+    }
+
+    public function referralCode() {
+        return $this->belongsTo(ReferralCode::class);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\Admin\ProposalController as AdminProposalController;
+use App\Http\Controllers\Admin\ReferralCodeController;
 use App\Http\Controllers\Auth\RoleSelectionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DealController;
@@ -58,6 +59,10 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::get('/proposals', [AdminProposalController::class, 'index'])->name('proposals.index');
     Route::put('/proposals/{proposal}/approve', [AdminProposalController::class, 'approve'])->name('proposals.approve');
     Route::put('/proposals/{proposal}/reject', [AdminProposalController::class, 'reject'])->name('proposals.reject');
+
+    // Referral Codes Management
+    Route::resource('referral-codes', ReferralCodeController::class);
+    Route::patch('/referral-codes/{referralCode}/toggle', [ReferralCodeController::class, 'toggleStatus'])->name('referral-codes.toggle');
 });
 
 require __DIR__.'/auth.php';

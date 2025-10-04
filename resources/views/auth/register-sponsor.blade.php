@@ -13,8 +13,15 @@
         <p class="text-gray-600 mb-6">Lengkapi data perusahaan dan Anda untuk membuat akun.</p>
 
         <div>
+            <x-input-label for="referral_code" value="Kode Referral" />
+            <x-text-input id="referral_code" class="block mt-1 w-full" type="text" name="referral_code" :value="old('referral_code')" required autofocus placeholder="Masukkan kode referral Anda" />
+            <x-input-error :messages="$errors->get('referral_code')" class="mt-2" />
+            <p class="text-xs text-gray-500 mt-1">Anda memerlukan kode referral untuk mendaftar sebagai sponsor</p>
+        </div>
+
+        <div class="mt-4">
             <x-input-label for="name" value="Nama Lengkap PIC" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 

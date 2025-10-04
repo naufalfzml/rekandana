@@ -41,6 +41,9 @@
                             <x-nav-link :href="route('admin.proposals.index')" :active="request()->routeIs('admin.proposals.index')">
                                 Moderasi Proposal
                             </x-nav-link>
+                            <x-nav-link :href="route('admin.referral-codes.index')" :active="request()->routeIs('admin.referral-codes.*')">
+                                Kode Referral
+                            </x-nav-link>
                         @endif
                     </div>
                 </div>
