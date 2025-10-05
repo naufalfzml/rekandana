@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
             Ajukan Proposal Baru
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 md:p-8 text-gray-900">
+            <div class="glass-card overflow-hidden sm:rounded-xl">
+                <div class="p-6 md:p-8 text-gray-100">
                     <form action="{{ route('mahasiswa.proposals.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
 
@@ -20,7 +20,7 @@
 
                         <div>
                             <x-input-label for="kategori" value="Kategori" />
-                            <select name="kategori" id="kategori" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                            <select name="kategori" id="kategori" class="mt-1 block w-full select-dark rounded-md shadow-sm" required>
                                 <option value="">-- Pilih Kategori --</option>
                                 <option value="Seminar" {{ old('kategori') == 'Seminar' ? 'selected' : '' }}>Seminar</option>
                                 <option value="Workshop" {{ old('kategori') == 'Workshop' ? 'selected' : '' }}>Workshop</option>
@@ -33,7 +33,7 @@
 
                         <div>
                             <x-input-label for="bidang" value="Bidang" />
-                            <select name="bidang" id="bidang" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                            <select name="bidang" id="bidang" class="mt-1 block w-full select-dark rounded-md shadow-sm" required>
                                 <option value="">-- Pilih Bidang --</option>
                                 <option value="Teknologi" {{ old('bidang') == 'Teknologi' ? 'selected' : '' }}>Teknologi</option>
                                 <option value="Lingkungan" {{ old('bidang') == 'Lingkungan' ? 'selected' : '' }}>Lingkungan</option>
@@ -56,7 +56,7 @@
 
                         <div>
                             <x-input-label for="description" value="Deskripsi Singkat" />
-                            <textarea id="description" name="description" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('description') }}</textarea>
+                            <textarea id="description" name="description" rows="4" class="mt-1 block w-full textarea-dark rounded-md shadow-sm">{{ old('description') }}</textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
@@ -68,7 +68,7 @@
                         
                         <div>
                             <x-input-label for="proposal_file" value="Upload Dokumen Proposal (PDF, DOC, DOCX - Max 5MB)" />
-                            <input id="proposal_file" name="proposal_file" type="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" required>
+                            <input id="proposal_file" name="proposal_file" type="file" class="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-gray-200 hover:file:bg-slate-700" required>
                             <x-input-error class="mt-2" :messages="$errors->get('proposal_file')" />
                         </div>
 
@@ -80,13 +80,13 @@
                     <!-- Taruh di dalam <form> -->
                         <div>
                             <x-input-label for="target_sponsor_id" value="Kirim Langsung ke Perusahaan (Opsional)" />
-                            <select id="target_sponsor_id" name="target_sponsor_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                            <select id="target_sponsor_id" name="target_sponsor_id" class="mt-1 block w-full select-dark rounded-md shadow-sm">
                                 <option value="">Tidak, kirim ke semua sponsor (Umum)</option>
                                 @foreach($sponsors as $sponsor)
                                     <option value="{{ $sponsor->id }}">{{ $sponsor->company_name ?? $sponsor->name }}</option>
                                 @endforeach
                             </select>
-                            <p class="mt-1 text-sm text-gray-500">Jika tidak dipilih, proposal akan masuk ke daftar umum.</p>
+                            <p class="mt-1 text-sm text-gray-400">Jika tidak dipilih, proposal akan masuk ke daftar umum.</p>
                         </div>
                         
                         <div class="flex items-center gap-4">

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="text-left mb-6">
-        <a href="{{ route('register') }}" class="text-sm text-gray-600 hover:text-gray-900">
+        <a href="{{ route('register') }}" class="text-sm text-gray-300 hover:text-white">
             &larr; Kembali
         </a>
     </div>
@@ -9,14 +9,14 @@
         @csrf
         <input type="hidden" name="role" value="sponsor">
 
-        <h2 class="text-2xl font-bold mb-1">Daftar sebagai Pemberi Sponsor</h2>
-        <p class="text-gray-600 mb-6">Lengkapi data perusahaan dan Anda untuk membuat akun.</p>
+        <h2 class="text-2xl font-bold mb-1 text-white">Daftar sebagai Pemberi Sponsor</h2>
+        <p class="text-gray-300 mb-6">Lengkapi data perusahaan dan Anda untuk membuat akun.</p>
 
         <div>
             <x-input-label for="referral_code" value="Kode Referral" />
             <x-text-input id="referral_code" class="block mt-1 w-full" type="text" name="referral_code" :value="old('referral_code')" required autofocus placeholder="Masukkan kode referral Anda" />
             <x-input-error :messages="$errors->get('referral_code')" class="mt-2" />
-            <p class="text-xs text-gray-500 mt-1">Anda memerlukan kode referral untuk mendaftar sebagai sponsor</p>
+            <p class="text-xs text-gray-400 mt-1">Anda memerlukan kode referral untuk mendaftar sebagai sponsor</p>
         </div>
 
         <div class="mt-4">
@@ -33,7 +33,7 @@
         
         <div class="mt-4">
             <x-input-label for="company_address" value="Alamat Kantor Perusahaan" />
-            <textarea id="company_address" name="company_address" rows="3" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('company_address') }}</textarea>
+            <textarea id="company_address" name="company_address" rows="3" class="block mt-1 w-full textarea-dark rounded-md shadow-sm">{{ old('company_address') }}</textarea>
             <x-input-error :messages="$errors->get('company_address')" class="mt-2" />
         </div>
 
@@ -51,7 +51,7 @@
 
         <div class="mt-4">
             <x-input-label for="industry" value="Bidang Industri" />
-            <select id="industry" name="industry" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <select id="industry" name="industry" class="block mt-1 w-full select-dark rounded-md shadow-sm">
                 <option>Pilih bidang industri</option>
                 <option value="Teknologi" @selected(old('industry') == 'Teknologi')>Teknologi</option>
                 <option value="Keuangan" @selected(old('industry') == 'Keuangan')>Keuangan</option>
@@ -72,20 +72,20 @@
         
         <div class="mt-4">
              <x-input-label for="logo" value="Logo Perusahaan" />
-             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-white/20 border-dashed rounded-md bg-slate-900/30">
                 <div id="logo-upload-ui" class="space-y-1 text-center">
-                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                    <svg class="mx-auto h-12 w-12 text-gray-300" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <div class="flex text-sm text-gray-600">
-                        <label for="logo" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                    <div class="flex text-sm text-gray-300">
+                        <label for="logo" class="relative cursor-pointer rounded-md font-medium text-indigo-300 hover:text-indigo-200 focus-within:outline-none">
                             <span>Klik untuk upload</span>
                             <input id="logo" name="logo" type="file" class="sr-only">
                         </label>
                         <p class="pl-1">atau drag and drop</p>
                     </div>
-                    <p class="text-xs text-gray-500">PNG, JPG atau PDF (Maks. 2MB)</p>
-                    <p id="logo-file-name" class="text-sm text-gray-800 font-semibold mt-2"></p>
+                    <p class="text-xs text-gray-400">PNG, JPG atau PDF (Maks. 2MB)</p>
+                    <p id="logo-file-name" class="text-sm text-gray-200 font-semibold mt-2"></p>
                 </div>
             </div>
             <x-input-error :messages="$errors->get('logo')" class="mt-2" />
@@ -101,8 +101,8 @@
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
         </div>
 
-        <div class="flex items-center mt-6 justify-center bg-black rounded-md">
-            <button class="text-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">Daftar &amp; Verifikasi Email</button>
+        <div class="flex items-center mt-6 justify-center">
+            <button class="btn-gradient w-full px-4 py-2 rounded-lg font-semibold text-white">Daftar &amp; Verifikasi Email</button>
         </div>
     </form>
 

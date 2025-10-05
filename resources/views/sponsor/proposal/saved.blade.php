@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
             Proposal Disimpan
         </h2>
     </x-slot>
@@ -12,8 +12,8 @@
                     <x-proposal-card :proposal="$proposal" />
                 @empty
                     <div class="col-span-full text-center py-12">
-                        <p class="text-gray-600">Anda belum menyimpan proposal apapun.</p>
-                        <a href="{{ route('sponsor.proposals.index') }}" class="mt-2 text-indigo-600 font-semibold hover:underline">
+                        <p class="text-gray-300">Anda belum menyimpan proposal apapun.</p>
+                        <a href="{{ route('sponsor.proposals.index') }}" class="mt-2 text-indigo-300 font-semibold hover:underline">
                             Mulai cari proposal sekarang!
                         </a>
                     </div>

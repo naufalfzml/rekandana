@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
             Proposal Langsung untuk {{ auth()->user()->company_name }}
         </h2>
     </x-slot>
@@ -22,16 +22,16 @@
             </div>
 
             <!-- Filters and Search -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="glass-card neon-border overflow-hidden sm:rounded-xl mb-6">
                 <div class="p-6">
                     <div class="flex flex-col lg:flex-row gap-4">
                         <!-- Search -->
                         <div class="flex-1">
                             <div class="relative">
                                 <input type="text" id="search-proposals" 
-                                       class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                                       class="w-full px-4 py-3 pl-10 input-dark rounded-lg" 
                                        placeholder="Cari berdasarkan judul, nama mahasiswa, atau universitas...">
-                                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-gray-300 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </div>
@@ -39,7 +39,7 @@
                         
                         <!-- Filters -->
                         <div class="flex gap-3">
-                            <select id="status-filter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <select id="status-filter" class="px-4 py-3 select-dark rounded-lg">
                                 <option value="">Semua Status</option>
                                 <option value="pending">Menunggu Review</option>
                                 <option value="reviewed">Sudah Direview</option>
@@ -47,7 +47,7 @@
                                 <option value="not_interested">Tidak Tertarik</option>
                             </select>
                             
-                            <select id="category-filter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <select id="category-filter" class="px-4 py-3 select-dark rounded-lg">
                                 <option value="">Semua Kategori</option>
                                 <option value="Teknologi">Teknologi</option>
                                 <option value="Pendidikan">Pendidikan</option>
@@ -57,7 +57,7 @@
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                             
-                            <button id="clear-filters" class="px-4 py-3 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <button id="clear-filters" class="px-4 py-3 btn-ghost rounded-lg transition-colors duration-200">
                                 Reset
                             </button>
                         </div>
@@ -69,7 +69,7 @@
             <div class="space-y-4">
                 @forelse($directProposals as $invitation)
                     @if($invitation->proposal && $invitation->proposal->user)
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200 proposal-card" 
+                        <div class="glass-card overflow-hidden sm:rounded-xl neon-border hover:shadow-lg transition-shadow duration-200 proposal-card" 
                              data-proposal-id="{{ $invitation->proposal->id }}"
                              data-status="{{ $invitation->status ?? 'pending' }}"
                              data-category="{{ $invitation->proposal->kategori }}"
@@ -87,10 +87,10 @@
                                                 @php
                                                     $status = $invitation->status ?? 'pending';
                                                     $statusColors = [
-                                                        'pending' => 'bg-yellow-100 text-yellow-800',
-                                                        'reviewed' => 'bg-blue-100 text-blue-800',
-                                                        'interested' => 'bg-green-100 text-green-800',
-                                                        'not_interested' => 'bg-red-100 text-red-800'
+                                                        'pending' => 'bg-yellow-900/30 text-yellow-300',
+                                                        'reviewed' => 'bg-blue-900/30 text-blue-300',
+                                                        'interested' => 'bg-emerald-900/30 text-emerald-300',
+                                                        'not_interested' => 'bg-red-900/30 text-red-300'
                                                     ];
                                                     $statusLabels = [
                                                         'pending' => 'Menunggu Review',
@@ -106,8 +106,8 @@
                                             
                                             <!-- Proposal Info -->
                                             <div class="flex-1">
-                                                <h3 class="text-lg font-semibold text-gray-800 mb-2">
-                                                    <a href="#" class="hover:text-blue-600 transition-colors duration-200 view-proposal-detail" 
+                                                <h3 class="text-lg font-semibold text-white mb-2">
+                                                    <a href="#" class="hover:text-indigo-300 transition-colors duration-200 view-proposal-detail" 
                                                        data-proposal-id="{{ $invitation->proposal->id }}">
                                                         {{ $invitation->proposal->title }}
                                                     </a>
@@ -121,39 +121,39 @@
                                                         </svg>
                                                     </div>
                                                     <div>
-                                                        <p class="font-medium text-gray-800">{{ $invitation->proposal->user->name }}</p>
-                                                        <p class="text-sm text-gray-600">{{ $invitation->proposal->user->university ?? 'Universitas tidak tersedia' }}</p>
+                                                        <p class="font-medium text-white">{{ $invitation->proposal->user->name }}</p>
+                                                        <p class="text-sm text-gray-300">{{ $invitation->proposal->user->university ?? 'Universitas tidak tersedia' }}</p>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Tags -->
                                                 <div class="flex flex-wrap gap-2 mb-3">
-                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-900/30 text-blue-300">
                                                         {{ $invitation->proposal->kategori }}
                                                     </span>
-                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300">
                                                         {{ $invitation->proposal->bidang }}
                                                     </span>
-                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-300">
                                                         {{ $invitation->proposal->tanggal_acara }}
                                                     </span>
                                                 </div>
                                                 
                                                 <!-- Description -->
-                                                <p class="text-gray-600 text-sm line-clamp-2 mb-3">
+                                                <p class="text-gray-300 text-sm line-clamp-2 mb-3">
                                                     {{ $invitation->proposal->description }}
                                                 </p>
                                                 
                                                 <!-- Funding Goal -->
                                                 <div class="flex items-center text-sm">
-                                                    <svg class="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg class="w-4 h-4 mr-1 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                                     </svg>
-                                                    <span class="font-semibold text-green-600">
+                                                    <span class="font-semibold text-emerald-300">
                                                         Rp {{ number_format($invitation->proposal->funding_goal, 0, ',', '.') }}
                                                     </span>
-                                                    <span class="text-gray-500 ml-2">•</span>
-                                                    <span class="text-gray-500 ml-2">
+                                                    <span class="text-gray-400 ml-2">•</span>
+                                                    <span class="text-gray-400 ml-2">
                                                         Dikirim {{ $invitation->created_at->diffForHumans() }}
                                                     </span>
                                                 </div>
@@ -191,17 +191,17 @@
                     @endif
                 @empty
                     <!-- Empty State -->
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="glass-card overflow-hidden sm:rounded-xl">
                         <div class="p-12 text-center">
-                            <svg class="w-24 h-24 text-gray-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Belum ada proposal langsung</h3>
-                            <p class="text-gray-600 mb-6">
+                            <h3 class="text-xl font-semibold text-white mb-2">Belum ada proposal langsung</h3>
+                            <p class="text-gray-300 mb-6">
                                 Belum ada mahasiswa yang mengirim proposal langsung ke perusahaan Anda.
                             </p>
                             <a href="{{ route('sponsor.proposals.index') }}" 
-                               class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                               class="inline-flex items-center px-6 py-3 btn-gradient text-white font-semibold rounded-lg transition-colors duration-200">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
@@ -225,7 +225,7 @@
     <div id="proposal-modal" class="fixed inset-0 z-50 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div class="fixed inset-0 flex items-center justify-center p-4">
-            <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+            <div class="glass-card text-gray-100 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
                 <!-- Modal Header -->
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
                     <div class="flex items-center justify-between">
@@ -244,16 +244,16 @@
                 </div>
 
                 <!-- Modal Footer -->
-                <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+                        <div class="px-6 py-4 border-t border-white/10 bg-slate-800/60">
                     <div class="flex justify-between items-center">
-                        <div class="text-sm text-gray-600">
+                        <div class="text-sm text-gray-300">
                             <span id="modal-status"></span>
                         </div>
                         <div class="flex space-x-3">
-                            <button id="modal-close-btn" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <button id="modal-close-btn" class="px-4 py-2 btn-ghost rounded-lg transition-colors duration-200">
                                 Tutup
                             </button>
-                            <button id="modal-interested-btn" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200" style="display: none;">
+                            <button id="modal-interested-btn" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-200" style="display: none;">
                                 Tandai Tertarik
                             </button>
                             <button id="modal-not-interested-btn" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200" style="display: none;">
@@ -326,8 +326,8 @@
                 modalTitle.textContent = 'Detail Proposal';
                 modalContent.innerHTML = `
                     <div class="text-center py-8">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                        <p class="text-gray-600">Memuat detail proposal...</p>
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto mb-4"></div>
+                        <p class="text-gray-300">Memuat detail proposal...</p>
                     </div>
                 `;
                 proposalModal.classList.remove('hidden');
@@ -336,23 +336,23 @@
                 setTimeout(() => {
                     modalContent.innerHTML = `
                         <div class="space-y-6">
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Informasi Mahasiswa</h3>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold text-white mb-3">Informasi Mahasiswa</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <p class="text-sm text-gray-600">Nama</p>
+                                        <p class="text-sm text-gray-300">Nama</p>
                                         <p class="font-medium">Proposal ID: ${proposalId}</p>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-600">Universitas</p>
+                                        <p class="text-sm text-gray-300">Universitas</p>
                                         <p class="font-medium">Data akan dimuat dari database</p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Detail Proposal</h3>
-                                <p class="text-gray-700">Detail lengkap proposal akan ditampilkan di sini.</p>
+                            <div class="bg-indigo-900/20 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold text-white mb-3">Detail Proposal</h3>
+                                <p class="text-gray-200">Detail lengkap proposal akan ditampilkan di sini.</p>
                             </div>
                         </div>
                     `;
@@ -387,9 +387,9 @@
                 btn.addEventListener('click', function() {
                     const invitationId = this.dataset.invitationId;
                     alert('Proposal ditandai sebagai tertarik!');
-                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100');
+                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100, .bg-yellow-900/30, .bg-blue-900/30, .bg-green-900/30, .bg-red-900/30');
                     if (statusBadge) {
-                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800';
+                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300';
                         statusBadge.textContent = 'Tertarik';
                     }
                     this.parentElement.style.display = 'none';
@@ -402,9 +402,9 @@
                     // Here you would send a request to mark as not interested
                     alert('Proposal ditandai sebagai tidak tertarik.');
                     // Update UI
-                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100');
+                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100, .bg-yellow-900/30, .bg-blue-900/30, .bg-green-900/30, .bg-red-900/30');
                     if (statusBadge) {
-                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800';
+                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-900/30 text-red-300';
                         statusBadge.textContent = 'Tidak Tertarik';
                     }
                     this.parentElement.style.display = 'none';
