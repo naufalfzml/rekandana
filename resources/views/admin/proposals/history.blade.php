@@ -141,7 +141,7 @@
                             </thead>
                             <tbody class="divide-y divide-white/10">
                                 @forelse($approvedProposals as $proposal)
-                                    <tr x-data="{ modalOpen: false }" class="hover:bg-slate-800/30 transition-colors">
+                                    <tr class="hover:bg-slate-800/30 transition-colors">
                                         <td class="px-6 py-4">
                                             <p class="font-semibold text-white">{{ $proposal->title }}</p>
                                             <div class="flex gap-2 mt-1">
@@ -170,153 +170,10 @@
                                             <span class="text-xs text-gray-400">{{ $proposal->updated_at->diffForHumans() }}</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <button @click="modalOpen = true" class="px-3 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition-colors">
+                                            <a href="{{ route('admin.proposals.show', ['proposal' => $proposal->id, 'from' => 'history', 'back' => request()->fullUrl()]) }}" class="px-3 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition-colors inline-block">
                                                 Lihat Detail
-                                            </button>
+                                            </a>
                                         </td>
-
-                                        <!-- Modal -->
-                                        <div x-show="modalOpen"
-                                             style="display:none;"
-                                             x-on:keydown.escape.window="modalOpen = false"
-                                             x-teleport="body"
-                                             class="fixed inset-0 z-[70] flex items-center justify-center p-4">
-
-                                             <!-- Background Overlay -->
-                                             <div x-show="modalOpen" x-transition.opacity @click="modalOpen = false" class="fixed inset-0 bg-black bg-opacity-50"></div>
-
-                                             <!-- Modal Content -->
-                                             <div x-show="modalOpen" x-transition
-                                                  @click.outside="modalOpen = false"
-                                                  class="relative glass-card text-gray-100 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-
-                                                  <!-- Modal Header -->
-                                                  <div class="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4">
-                                                      <div class="flex items-center justify-between">
-                                                          <h2 class="text-xl font-bold text-white">{{ $proposal->title }}</h2>
-                                                          <button @click="modalOpen = false"
-                                                                  class="text-white hover:text-gray-200 transition-colors duration-200">
-                                                              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                                              </svg>
-                                                          </button>
-                                                      </div>
-                                                  </div>
-
-                                                  <!-- Modal Body -->
-                                                  <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
-                                                      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                                                          <!-- Left Column -->
-                                                          <div class="space-y-4">
-                                                              <div class="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Informasi Pengaju</h3>
-                                                                  <div class="space-y-2">
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Nama:</span>
-                                                                          <span class="font-medium">{{ $proposal->user->name }}</span>
-                                                                      </div>
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Universitas:</span>
-                                                                          <span class="font-medium">{{ $proposal->user->university }}</span>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-
-                                                              <div class="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Kategori & Bidang</h3>
-                                                                  <div class="space-y-2">
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Kategori:</span>
-                                                                          <span class="font-medium">{{ $proposal->kategori }}</span>
-                                                                      </div>
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Bidang:</span>
-                                                                          <span class="font-medium">{{ $proposal->bidang }}</span>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-
-                                                              <div class="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Detail Acara</h3>
-                                                                  <div class="space-y-2">
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Tanggal:</span>
-                                                                          <span class="font-medium">{{ $proposal->tanggal_acara }}</span>
-                                                                      </div>
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Penyelenggara:</span>
-                                                                          <span class="font-medium">{{ $proposal->penyelenggara }}</span>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-
-                                                              <div class="bg-emerald-900/20 border border-emerald-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Status Approval</h3>
-                                                                  <div class="space-y-2">
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Disetujui pada:</span>
-                                                                          <span class="font-medium text-emerald-300">{{ $proposal->updated_at->format('d M Y H:i') }}</span>
-                                                                      </div>
-                                                                      <div class="flex justify-between">
-                                                                          <span class="text-slate-300">Status:</span>
-                                                                          <span class="px-2 py-1 rounded-full text-xs font-semibold bg-emerald-900/30 text-emerald-300">Approved</span>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-
-                                                          <!-- Right Column -->
-                                                          <div class="space-y-4">
-                                                              <div class="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-slate-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Deskripsi Proposal</h3>
-                                                                  <p class="text-slate-200 leading-relaxed">{{ $proposal->description }}</p>
-                                                              </div>
-
-                                                              <div class="bg-gradient-to-br from-emerald-900/20 to-teal-900/20 border border-slate-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Target Pendanaan</h3>
-                                                                  <div class="text-center">
-                                                                      <span class="text-3xl font-bold text-emerald-300">Rp {{ number_format($proposal->funding_goal, 0, ',', '.') }}</span>
-                                                                  </div>
-                                                              </div>
-
-                                                              <div class="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-                                                                  <h3 class="text-lg font-semibold text-white mb-3">Link Sosial Media</h3>
-                                                                  @php
-                                                                      $socialLink = $proposal->link_sosmed;
-                                                                      if (!empty($socialLink) && !str_starts_with($socialLink, 'http://') && !str_starts_with($socialLink, 'https://')) {
-                                                                          $socialLink = 'https://' . $socialLink;
-                                                                      }
-                                                                  @endphp
-                                                                  @if(!empty($socialLink))
-                                                                      <a href="{{ $socialLink }}"
-                                                                         target="_blank"
-                                                                         rel="noopener noreferrer"
-                                                                         class="inline-flex items-center text-indigo-300 hover:text-indigo-200">
-                                                                          {{ $proposal->link_sosmed }}
-                                                                      </a>
-                                                                  @else
-                                                                      <span class="text-slate-400 italic">Tidak ada link</span>
-                                                                  @endif
-                                                              </div>
-                                                          </div>
-                                                      </div>
-
-                                                      <!-- Document -->
-                                                      <div class="mt-6 bg-indigo-900/20 rounded-lg p-4">
-                                                          <h3 class="text-lg font-semibold text-white mb-3">Dokumen Proposal</h3>
-                                                          <a href="{{ asset('storage/' . $proposal->file_path) }}"
-                                                             target="_blank"
-                                                             class="inline-flex items-center px-4 py-2 btn-gradient text-white rounded-lg">
-                                                              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                                              </svg>
-                                                              Lihat Dokumen
-                                                          </a>
-                                                      </div>
-                                                  </div>
-                                             </div>
-                                        </div>
                                     </tr>
                                 @empty
                                     <tr>
@@ -345,4 +202,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const openModals = document.querySelectorAll('.fixed.inset-0.z-\\[70\\]:not(.hidden)');
+                openModals.forEach(modal => {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+    </script>
 </x-app-layout>

@@ -173,16 +173,25 @@
                                         </button>
                                         
                                         @if(($invitation->status ?? 'pending') === 'pending')
-                                            <div class="flex space-x-2">
+                                            <div class="flex space-x-2 action-buttons">
                                                 <button class="mark-interested px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition-colors duration-200"
-                                                        data-invitation-id="{{ $invitation->id }}">
-                                                    Tertarik
+                                                        data-invitation-id="{{ $invitation->id }}"
+                                                        data-proposal-id="{{ $invitation->proposal->id }}">
+                                                    Simpan
                                                 </button>
-                                                <button class="mark-not-interested px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors duration-200"
+                                                <button class="mark-rejected px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors duration-200"
                                                         data-invitation-id="{{ $invitation->id }}">
-                                                    Tidak
+                                                    Tolak
                                                 </button>
                                             </div>
+                                        @elseif(($invitation->status ?? '') === 'interested')
+                                            <a href="{{ route('sponsor.deals.initiate', $invitation->proposal->id) }}"
+                                               class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 text-center">
+                                                <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                Mulai Deal
+                                            </a>
                                         @endif
                                     </div>
                                 </div>
@@ -386,28 +395,133 @@
             document.querySelectorAll('.mark-interested').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const invitationId = this.dataset.invitationId;
-                    alert('Proposal ditandai sebagai tertarik!');
-                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100, .bg-yellow-900/30, .bg-blue-900/30, .bg-green-900/30, .bg-red-900/30');
-                    if (statusBadge) {
-                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300';
-                        statusBadge.textContent = 'Tertarik';
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
+                    if (!csrfToken) {
+                        alert('CSRF token tidak ditemukan. Silakan refresh halaman.');
+                        return;
                     }
-                    this.parentElement.style.display = 'none';
+
+                    if (confirm('Apakah Anda yakin ingin menyimpan proposal ini?')) {
+                        fetch(`/sponsor/proposals/direct/${invitationId}/save`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken.content,
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                const card = this.closest('.proposal-card');
+                                const proposalId = this.dataset.proposalId;
+
+                                // Update status badge
+                                const statusBadge = card.querySelector('span[class*="bg-yellow-900/30"], span[class*="bg-blue-900/30"], span[class*="bg-emerald-900/30"], span[class*="bg-red-900/30"]');
+                                if (statusBadge) {
+                                    statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300';
+                                    statusBadge.textContent = 'Tertarik';
+                                }
+
+                                // Update data attribute
+                                card.dataset.status = 'interested';
+
+                                // Replace action buttons with "Mulai Deal" button
+                                const actionButtonsContainer = this.closest('.action-buttons');
+                                if (actionButtonsContainer) {
+                                    const dealUrl = `/sponsor/deals/${proposalId}/initiate`;
+                                    actionButtonsContainer.outerHTML = `
+                                        <a href="${dealUrl}"
+                                           class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 text-center inline-block">
+                                            <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            Mulai Deal
+                                        </a>
+                                    `;
+                                }
+
+                                // Show toast notification
+                                if (typeof showToast === 'function') {
+                                    showToast(data.message || 'Proposal berhasil disimpan!', 'success');
+                                }
+                            } else {
+                                if (typeof showToast === 'function') {
+                                    showToast(data.message || 'Gagal menyimpan proposal.', 'error');
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            if (typeof showToast === 'function') {
+                                showToast('Terjadi kesalahan saat menyimpan proposal: ' + error.message, 'error');
+                            }
+                        });
+                    }
                 });
             });
 
-            document.querySelectorAll('.mark-not-interested').forEach(btn => {
+            document.querySelectorAll('.mark-rejected').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const invitationId = this.dataset.invitationId;
-                    // Here you would send a request to mark as not interested
-                    alert('Proposal ditandai sebagai tidak tertarik.');
-                    // Update UI
-                    const statusBadge = this.closest('.proposal-card').querySelector('.bg-yellow-100, .bg-blue-100, .bg-green-100, .bg-red-100, .bg-yellow-900/30, .bg-blue-900/30, .bg-green-900/30, .bg-red-900/30');
-                    if (statusBadge) {
-                        statusBadge.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-900/30 text-red-300';
-                        statusBadge.textContent = 'Tidak Tertarik';
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
+                    if (!csrfToken) {
+                        alert('CSRF token tidak ditemukan. Silakan refresh halaman.');
+                        return;
                     }
-                    this.parentElement.style.display = 'none';
+
+                    if (confirm('Apakah Anda yakin ingin menolak proposal ini? Proposal akan dihapus secara permanen dan mahasiswa akan menerima email notifikasi.')) {
+                        fetch(`/sponsor/proposals/direct/${invitationId}/reject`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken.content,
+                                'Accept': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                // Show toast notification
+                                if (typeof showToast === 'function') {
+                                    showToast(data.message || 'Proposal berhasil ditolak!', 'info');
+                                }
+                                // Remove the card from view
+                                const card = this.closest('.proposal-card');
+                                card.style.transition = 'opacity 0.3s';
+                                card.style.opacity = '0';
+                                setTimeout(() => {
+                                    card.remove();
+                                    // Check if there are no more proposals
+                                    if (document.querySelectorAll('.proposal-card').length === 0) {
+                                        location.reload();
+                                    }
+                                }, 300);
+                            } else {
+                                if (typeof showToast === 'function') {
+                                    showToast(data.message || 'Gagal menolak proposal.', 'error');
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            if (typeof showToast === 'function') {
+                                showToast('Terjadi kesalahan saat menolak proposal: ' + error.message, 'error');
+                            }
+                        });
+                    }
                 });
             });
         });

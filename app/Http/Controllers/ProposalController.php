@@ -39,11 +39,22 @@ class ProposalController extends Controller
     public function store(Request $request) {
 
         $this->authorize('create', Proposal::class);
+
+        // Validasi kuota direct proposal jika user mencoba mengirim ke sponsor tertentu
+        if($request->filled('target_sponsor_id')) {
+            $user = auth()->user();
+            if($user->direct_proposal_quota <= 0) {
+                return back()->withErrors([
+                    'target_sponsor_id' => 'Kuota direct proposal Anda sudah habis. Proposal akan dikirim ke daftar umum.'
+                ])->withInput();
+            }
+        }
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'funding_goal' => 'nullable|numeric',
-            'proposal_file' => 'required|file|mimes:pdf,doc,docx|max:5120', // Maks 5MB
+            'proposal_file' => 'required|file|mimes:pdf|max:5120', // Hanya PDF, Maks 5MB
             'kategori' => 'required|string',
             'bidang' => 'required|string',
             'tanggal_acara' => 'required|date',
@@ -60,7 +71,7 @@ class ProposalController extends Controller
             'description' => $request->description,
             'funding_goal' => $request->funding_goal,
             'file_path' => $filePath,
-            'status' => 'pending', 
+            'status' => 'pending',
             'kategori' => $request->kategori,
             'bidang' => $request->bidang,
             'tanggal_acara' => $request->tanggal_acara,
@@ -73,21 +84,32 @@ class ProposalController extends Controller
                 'proposal_id' => $proposal->id,
                 'sponsor_id' => $request->target_sponsor_id,
             ]);
+
+            // Kurangi kuota direct proposal (tidak akan kembali meskipun ditolak)
+            $user = auth()->user();
+            $remainingQuota = max(0, $user->direct_proposal_quota - 1);
+            $user->decrement('direct_proposal_quota');
+
+            // Get sponsor name
+            $sponsor = User::find($request->target_sponsor_id);
+            $sponsorName = $sponsor ? $sponsor->company_name : 'sponsor';
+
+            return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan! Proposal Anda telah dikirim langsung ke {$sponsorName} dan juga akan muncul di daftar proposal umum setelah disetujui admin. Sisa kuota direct proposal: {$remainingQuota}");
         }
 
-        return redirect()->route('dashboard')->with('success', 'Proposal berhasil diajukan dan sedang direview.');
+        return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan! Proposal Anda akan direview oleh tim admin dan kemudian akan muncul di daftar proposal untuk semua sponsor.");
     }
 
     //Untuk menambahkan proposal ke daftar minat (Sponsor)
     public function save(Proposal $proposal) {
         auth()->user()->savedProposals()->attach($proposal->id);
-        return back()->with('success', 'Proposal disimpan ke daftar minat');
+        return back()->with('success', "Proposal '{$proposal->title}' berhasil disimpan ke daftar minat Anda!");
     }
 
     public function unsave(Proposal $proposal)
     {
         auth()->user()->savedProposals()->detach($proposal->id);
-        return back()->with('success', 'Proposal dihapus dari daftar minat.');
+        return back()->with('info', "Proposal '{$proposal->title}' berhasil dihapus dari daftar minat.");
     }
     public function myProposals()
     {

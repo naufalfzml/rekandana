@@ -7,6 +7,32 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!-- Quota Info Card -->
+            <div class="mb-6 glass-card neon-border overflow-hidden sm:rounded-xl">
+                <div class="p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Kuota Direct Proposal</h3>
+                            <p class="text-sm text-gray-300">
+                                Sisa kuota untuk mengirim proposal langsung ke perusahaan tertentu
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full {{ auth()->user()->direct_proposal_quota > 0 ? 'bg-blue-900/30 border-2 border-blue-500' : 'bg-red-900/30 border-2 border-red-500' }}">
+                                <span class="text-3xl font-bold {{ auth()->user()->direct_proposal_quota > 0 ? 'text-blue-300' : 'text-red-300' }}">
+                                    {{ auth()->user()->direct_proposal_quota }}
+                                </span>
+                            </div>
+                            @if(auth()->user()->direct_proposal_quota <= 0)
+                                <p class="mt-2 text-xs text-gray-400">
+                                    💡 Premium coming soon!
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="glass-card neon-border overflow-hidden sm:rounded-xl">
                 <div class="p-6 text-gray-100">
                     <h3 class="text-lg font-medium mb-4">Daftar Proposal yang Telah Diajukan</h3>

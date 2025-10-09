@@ -44,4 +44,53 @@ class SponsorController extends Controller
         // Kirim data undangan ke view baru yang akan kita buat
         return view('sponsor.directs.show', compact('direct'));
     }
+
+    public function saveDirectProposal(ProposalInvitation $invitation)
+    {
+        // Validasi bahwa sponsor yang login adalah penerima undangan
+        if ($invitation->sponsor_id !== auth()->id()) {
+            return response()->json(['success' => false, 'message' => 'Akses ditolak'], 403);
+        }
+
+        $proposal = $invitation->proposal;
+        $proposalTitle = $proposal->title ?? 'Proposal';
+
+        // Update status invitation menjadi 'interested'
+        $invitation->update(['status' => 'interested']);
+
+        // Simpan proposal ke saved_proposals jika belum ada
+        $sponsor = auth()->user();
+        if (!$sponsor->savedProposals()->where('proposal_id', $proposal->id)->exists()) {
+            $sponsor->savedProposals()->attach($proposal->id);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => "Proposal '{$proposalTitle}' berhasil disimpan ke daftar minat Anda! Anda dapat menghubungi mahasiswa untuk melanjutkan diskusi."
+        ]);
+    }
+
+    public function rejectDirectProposal(ProposalInvitation $invitation)
+    {
+        // Validasi bahwa sponsor yang login adalah penerima undangan
+        if ($invitation->sponsor_id !== auth()->id()) {
+            return response()->json(['success' => false, 'message' => 'Akses ditolak'], 403);
+        }
+
+        // Ambil data proposal dan mahasiswa sebelum dihapus
+        $proposal = $invitation->proposal;
+        $mahasiswa = $proposal->user;
+        $proposalTitle = $proposal->title ?? 'Proposal';
+
+        // Hapus invitation dari database
+        $invitation->delete();
+
+        // Kirim email notifikasi ke mahasiswa
+        \Mail::to($mahasiswa->email)->send(new \App\Mail\ProposalRejected($proposal, $mahasiswa, auth()->user()));
+
+        return response()->json([
+            'success' => true,
+            'message' => "Proposal '{$proposalTitle}' berhasil ditolak. Email notifikasi telah dikirim ke mahasiswa."
+        ]);
+    }
 }

@@ -37,10 +37,10 @@ class ProposalStatusUpdated extends Notification
     {
         $subject = "Status Proposal Kamu Telah Diperbarui";
         $greeting = "Halo, " . $notifiable->name . "!";
-        $line = "Kabar baik! Proposal kamu yang berjudul **\"" . $this->proposalTitle . "\"** telah **" . $this->status . "**. ";
+        $line = "Kabar baik! Proposal kamu yang berjudul **\"" . $this->proposalTitle . "\"** telah **" . $this->status . "** oleh Admin. Proposal akan masuk ke dashboard Sponsor.";
 
         if ($this->status === 'ditolak') {
-            $line = "Ada pembaruan untuk proposal kamu yang berjudul **\"" . $this->proposalTitle . "\"**. Statusnya saat ini adalah **" . $this->status . "**. Silakan cek dashboard untuk detail lebih lanjut.";
+            $line = "Mohon maaf, proposal kamu yang berjudul **\"" . $this->proposalTitle . "\"** telah **" . $this->status . "**.";
         }
 
         return (new MailMessage)

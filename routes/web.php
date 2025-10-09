@@ -46,6 +46,8 @@ Route::middleware(['auth', 'verified', 'sponsor'])->prefix('sponsor')->name('spo
     Route::get('/proposals/search', [ProposalController::class, 'search'])->name('proposals.search');
     Route::get('/proposals/direct', [SponsorController::class, 'direct'])->name('proposals.direct' );
     Route::get('/proposals/direct/{direct}', [SponsorController::class, 'showDirect'])->name('proposals.direct.show');
+    Route::post('/proposals/direct/{invitation}/save', [SponsorController::class, 'saveDirectProposal'])->name('proposals.direct.save');
+    Route::delete('/proposals/direct/{invitation}/reject', [SponsorController::class, 'rejectDirectProposal'])->name('proposals.direct.reject');
     Route::get('/proposals/saved', [ProposalController::class, 'saved'])->name('proposals.saved');
     Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
     Route::post('/proposals/{proposal}/save', [ProposalController::class, 'save'])->name('proposals.save');
@@ -57,6 +59,8 @@ Route::middleware(['auth', 'verified', 'sponsor'])->prefix('sponsor')->name('spo
 //ROUTES KHUSUS UNTUK ADMIN
 Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/proposals', [AdminProposalController::class, 'index'])->name('proposals.index');
+    Route::get('/proposals/history', [AdminProposalController::class, 'history'])->name('proposals.history');
+    Route::get('/proposals/{proposal}', [AdminProposalController::class, 'show'])->name('proposals.show');
     Route::put('/proposals/{proposal}/approve', [AdminProposalController::class, 'approve'])->name('proposals.approve');
     Route::put('/proposals/{proposal}/reject', [AdminProposalController::class, 'reject'])->name('proposals.reject');
 
