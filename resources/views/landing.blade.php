@@ -301,7 +301,7 @@
                         @click="activeIndex = activeIndex === 0 ? null : 0"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Lorem ipsum dolor sit amet?</span>
+                        <span class="text-lg font-medium text-white">Apa itu platform Rekandana?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 0 }"
@@ -318,7 +318,7 @@
                         class="px-6 pb-5"
                     >
                         <p class="text-gray-300 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            Platform Rekandana adalah platform digital yang mempertemukan mahasiswa atau organisasi kampus dengan badan usaha yang ingin memberikan dukungan sponsorship dalam bentuk barang, jasa, atau dana.
                         </p>
                     </div>
                 </div>
@@ -329,7 +329,7 @@
                         @click="activeIndex = activeIndex === 1 ? null : 1"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Lorem ipsum dolor sit amet?</span>
+                        <span class="text-lg font-medium text-white">Bagaimana cara mengajukan proposal?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 1 }"
@@ -346,7 +346,7 @@
                         class="px-6 pb-5"
                     >
                         <p class="text-gray-300 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            Cukup buat akun, isi profil, unggah proposal sesuai format yang disediakan, lalu pilih apakah ingin mengajukannya secara publik (dilihat semua mitra) atau direct ke perusahaan tertentu.
                         </p>
                     </div>
                 </div>
@@ -357,7 +357,7 @@
                         @click="activeIndex = activeIndex === 2 ? null : 2"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Lorem ipsum dolor sit amet?</span>
+                        <span class="text-lg font-medium text-white">Apakah pengajuan proposal harus membayar?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 2 }"
@@ -374,7 +374,7 @@
                         class="px-6 pb-5"
                     >
                         <p class="text-gray-300 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            Tidak, pengajuan proposal dasar tidak dikenakan biaya. Namun, ada fitur premium untuk meningkatkan visibilitas proposal kamu kepada lebih banyak perusahaan.
                         </p>
                     </div>
                 </div>
@@ -385,7 +385,7 @@
                         @click="activeIndex = activeIndex === 3 ? null : 3"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Lorem ipsum dolor sit amet?</span>
+                        <span class="text-lg font-medium text-white">Apakah proposal saya aman dan tidak disalahgunakan?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 3 }"
@@ -402,7 +402,7 @@
                         class="px-6 pb-5"
                     >
                         <p class="text-gray-300 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            Ya. Semua proposal hanya dapat dilihat oleh perusahaan mitra terverifikasi dan tidak dapat diunduh tanpa izin.
                         </p>
                     </div>
                 </div>
@@ -413,7 +413,7 @@
                         @click="activeIndex = activeIndex === 4 ? null : 4"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Lorem ipsum dolor sit amet?</span>
+                        <span class="text-lg font-medium text-white">Apakah platform mengambil komisi dari transaksi sponsorship?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 4 }"
@@ -430,7 +430,91 @@
                         class="px-6 pb-5"
                     >
                         <p class="text-gray-300 leading-relaxed">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                            Tidak. Kami tidak mengambil komisi dari transaksi antara perusahaan dan pengaju. Platform kami hanya menyediakan ruang dan sistem penghubung.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="glass-card rounded-xl overflow-hidden border border-white/10">
+                    <button
+                        @click="activeIndex = activeIndex === 5 ? null : 5"
+                        class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                    >
+                        <span class="text-lg font-medium text-white">Bagaimana jika perusahaan tertarik dengan proposal saya?</span>
+                        <svg
+                            class="w-5 h-5 text-gray-400 transition-transform duration-200"
+                            :class="{ 'rotate-180': activeIndex === 5 }"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div
+                        x-show="activeIndex === 5"
+                        x-collapse
+                        class="px-6 pb-5"
+                    >
+                        <p class="text-gray-300 leading-relaxed">
+                            Jika perusahaan tertarik, platform akan menampilkan kontak kamu kepada perusahaan tersebut. Perusahaan dapat langsung menghubungi kamu untuk pembahasan lebih lanjut.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="glass-card rounded-xl overflow-hidden border border-white/10">
+                    <button
+                        @click="activeIndex = activeIndex === 6 ? null : 6"
+                        class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                    >
+                        <span class="text-lg font-medium text-white">Apakah sponsorship harus dalam bentuk uang tunai?</span>
+                        <svg
+                            class="w-5 h-5 text-gray-400 transition-transform duration-200"
+                            :class="{ 'rotate-180': activeIndex === 6 }"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div
+                        x-show="activeIndex === 6"
+                        x-collapse
+                        class="px-6 pb-5"
+                    >
+                        <p class="text-gray-300 leading-relaxed">
+                            Tidak harus. Perusahaan dapat memberikan dukungan dalam bentuk barang, jasa, atau fasilitas lain sesuai kebutuhan kegiatan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="glass-card rounded-xl overflow-hidden border border-white/10">
+                    <button
+                        @click="activeIndex = activeIndex === 7 ? null : 7"
+                        class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                    >
+                        <span class="text-lg font-medium text-white">Siapa saja yang bisa mengajukan proposal?</span>
+                        <svg
+                            class="w-5 h-5 text-gray-400 transition-transform duration-200"
+                            :class="{ 'rotate-180': activeIndex === 7 }"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div
+                        x-show="activeIndex === 7"
+                        x-collapse
+                        class="px-6 pb-5"
+                    >
+                        <p class="text-gray-300 leading-relaxed">
+                            Seluruh mahasiswa aktif atau organisasi resmi kampus (seperti BEM, UKM, komunitas, atau panitia kegiatan kampus) yang memiliki kegiatan terencana dan proposal resmi.
                         </p>
                     </div>
                 </div>
