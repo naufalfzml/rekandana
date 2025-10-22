@@ -21,10 +21,14 @@
 }
 
 /* Global font smoothing + stable scrollbar to avoid layout shift */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scrollbar-gutter: stable both-edges;
 }
 
 /* App background: layered subtle gradient for depth */

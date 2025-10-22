@@ -1,5 +1,5 @@
     <!-- Header/Navigation -->
-    <nav class="bg-slate-900/40 backdrop-blur border-b border-white/10">
+    <nav class="bg-slate-900/40 backdrop-blur border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
@@ -15,8 +15,7 @@
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#fitur" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Fitur</a>
                         <a href="#carakerja" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Cara Kerja</a>
-                        <a href="#testimoni" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Testimoni</a>
-                        <a href="#harga" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Harga</a>
+                        <a href="#faq" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">FAQ</a>
                     </div>
                 </div>
 

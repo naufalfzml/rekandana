@@ -69,21 +69,23 @@
             <div class="space-y-4">
                 @forelse($directProposals as $invitation)
                     @if($invitation->proposal && $invitation->proposal->user)
-                        <div class="glass-card overflow-hidden sm:rounded-xl neon-border hover:shadow-lg transition-shadow duration-200 proposal-card" 
+                        <div class="relative proposal-card"
+                             x-data="{ expanded: false }"
                              data-proposal-id="{{ $invitation->proposal->id }}"
                              data-status="{{ $invitation->status ?? 'pending' }}"
                              data-category="{{ $invitation->proposal->kategori }}"
                              data-title="{{ strtolower($invitation->proposal->title) }}"
                              data-student="{{ strtolower($invitation->proposal->user->name) }}"
                              data-university="{{ strtolower($invitation->proposal->user->university ?? '') }}">
-                            
-                            <div class="p-6">
-                                <div class="flex items-start justify-between">
-                                    <!-- Left Content -->
-                                    <div class="flex-1">
-                                        <div class="flex items-start space-x-4">
-                                            <!-- Status Badge -->
-                                            <div class="flex-shrink-0">
+
+                            <!-- Main Card -->
+                            <div class="glass-card overflow-hidden sm:rounded-xl neon-border hover:shadow-lg transition-all duration-200">
+                                <!-- Card Content (Always Visible) -->
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between">
+                                        <!-- Left: Title & Submitter -->
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-3 mb-2">
                                                 @php
                                                     $status = $invitation->status ?? 'pending';
                                                     $statusColors = [
@@ -102,98 +104,143 @@
                                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {{ $statusColors[$status] }}">
                                                     {{ $statusLabels[$status] }}
                                                 </span>
+                                                <span class="text-xs text-gray-400">
+                                                    Dikirim {{ $invitation->created_at->diffForHumans() }}
+                                                </span>
                                             </div>
-                                            
-                                            <!-- Proposal Info -->
-                                            <div class="flex-1">
-                                                <h3 class="text-lg font-semibold text-white mb-2">
-                                                    <a href="#" class="hover:text-indigo-300 transition-colors duration-200 view-proposal-detail" 
-                                                       data-proposal-id="{{ $invitation->proposal->id }}">
-                                                        {{ $invitation->proposal->title }}
-                                                    </a>
-                                                </h3>
-                                                
-                                                <!-- Student Info -->
-                                                <div class="flex items-center mb-3">
-                                                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-3">
-                                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <p class="font-medium text-white">{{ $invitation->proposal->user->name }}</p>
-                                                        <p class="text-sm text-gray-300">{{ $invitation->proposal->user->university ?? 'Universitas tidak tersedia' }}</p>
-                                                    </div>
-                                                </div>
-                                                
-                                                <!-- Tags -->
-                                                <div class="flex flex-wrap gap-2 mb-3">
-                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-900/30 text-blue-300">
-                                                        {{ $invitation->proposal->kategori }}
-                                                    </span>
-                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300">
-                                                        {{ $invitation->proposal->bidang }}
-                                                    </span>
-                                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-300">
-                                                        {{ $invitation->proposal->tanggal_acara }}
-                                                    </span>
-                                                </div>
-                                                
-                                                <!-- Description -->
-                                                <p class="text-gray-300 text-sm line-clamp-2 mb-3">
-                                                    {{ $invitation->proposal->description }}
-                                                </p>
-                                                
-                                                <!-- Funding Goal -->
-                                                <div class="flex items-center text-sm">
-                                                    <svg class="w-4 h-4 mr-1 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+
+                                            <h3 class="text-xl font-bold text-white mb-2">
+                                                {{ $invitation->proposal->title }}
+                                            </h3>
+
+                                            <div class="flex items-center text-gray-300">
+                                                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-2">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                                     </svg>
-                                                    <span class="font-semibold text-emerald-300">
-                                                        Rp {{ number_format($invitation->proposal->funding_goal, 0, ',', '.') }}
-                                                    </span>
-                                                    <span class="text-gray-400 ml-2">•</span>
-                                                    <span class="text-gray-400 ml-2">
-                                                        Dikirim {{ $invitation->created_at->diffForHumans() }}
-                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-white">{{ $invitation->proposal->user->name }}</p>
+                                                    <p class="text-sm text-gray-400">{{ $invitation->proposal->user->university ?? 'Universitas tidak tersedia' }}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <!-- Right Actions -->
-                                    <div class="flex flex-col space-y-2 ml-6">
-                                        <button class="view-proposal-detail px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                                                data-proposal-id="{{ $invitation->proposal->id }}">
-                                            <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                            </svg>
-                                            Lihat Detail
-                                        </button>
-                                        
-                                        @if(($invitation->status ?? 'pending') === 'pending')
-                                            <div class="flex space-x-2 action-buttons">
-                                                <button class="mark-interested px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition-colors duration-200"
+
+                                        <!-- Right: Action Buttons -->
+                                        <div class="flex gap-2 ml-6">
+                                            @if(($invitation->status ?? 'pending') === 'pending')
+                                                <button class="mark-interested px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200"
                                                         data-invitation-id="{{ $invitation->id }}"
                                                         data-proposal-id="{{ $invitation->proposal->id }}">
                                                     Simpan
                                                 </button>
-                                                <button class="mark-rejected px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors duration-200"
+                                                <button class="mark-rejected px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors duration-200"
                                                         data-invitation-id="{{ $invitation->id }}">
                                                     Tolak
                                                 </button>
-                                            </div>
-                                        @elseif(($invitation->status ?? '') === 'interested')
-                                            <a href="{{ route('sponsor.deals.initiate', $invitation->proposal->id) }}"
-                                               class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 text-center">
-                                                <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                </svg>
-                                                Mulai Deal
-                                            </a>
-                                        @endif
+                                            @elseif(($invitation->status ?? '') === 'interested')
+                                                <a href="{{ route('sponsor.deals.initiate', $invitation->proposal->id) }}"
+                                                   class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200">
+                                                    <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                    Mulai Deal
+                                                </a>
+                                            @endif
+                                        </div>
                                     </div>
+                                </div>
+
+                                <!-- Bottom Strip with Arrow (Toggle Button) -->
+                                <div class="relative -mt-2">
+                                    <button @click="expanded = !expanded"
+                                            class="w-full py-3 bg-gradient-to-b from-white/5 to-white/10 hover:from-white/10 hover:to-white/15 transition-all duration-200 flex items-center justify-center rounded-b-xl border-t border-white/10">
+                                        <svg class="w-5 h-5 text-gray-300 transition-transform duration-300"
+                                             :class="{ 'rotate-180': expanded }"
+                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Expandable Detail Section -->
+                            <div x-show="expanded"
+                                 x-collapse
+                                 class="border-t border-white/10 bg-white/5">
+                                <div class="p-6 space-y-6">
+                                    <!-- Info Cards Grid -->
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        @if($invitation->proposal->kategori)
+                                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                            <p class="text-xs text-gray-400 mb-1">Kategori</p>
+                                            <p class="text-sm font-semibold text-white">{{ $invitation->proposal->kategori }}</p>
+                                        </div>
+                                        @endif
+
+                                        @if($invitation->proposal->bidang)
+                                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                            <p class="text-xs text-gray-400 mb-1">Bidang</p>
+                                            <p class="text-sm font-semibold text-white">{{ $invitation->proposal->bidang }}</p>
+                                        </div>
+                                        @endif
+
+                                        @if($invitation->proposal->penyelenggara)
+                                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                            <p class="text-xs text-gray-400 mb-1">Penyelenggara</p>
+                                            <p class="text-sm font-semibold text-white">{{ $invitation->proposal->penyelenggara }}</p>
+                                        </div>
+                                        @endif
+
+                                        @if($invitation->proposal->tanggal_acara)
+                                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                            <p class="text-xs text-gray-400 mb-1">Tanggal Acara</p>
+                                            <p class="text-sm font-semibold text-white">{{ \Carbon\Carbon::parse($invitation->proposal->tanggal_acara)->format('d F Y') }}</p>
+                                        </div>
+                                        @endif
+
+                                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                            <p class="text-xs text-gray-400 mb-1">Status Proposal</p>
+                                            <p class="text-sm font-semibold text-white capitalize">
+                                                <span class="px-2 py-1 rounded-full text-xs
+                                                    @if($invitation->proposal->status == 'approved') bg-green-500/20 text-green-300
+                                                    @elseif($invitation->proposal->status == 'pending') bg-yellow-500/20 text-yellow-300
+                                                    @elseif($invitation->proposal->status == 'rejected') bg-red-500/20 text-red-300
+                                                    @else bg-gray-500/20 text-gray-300
+                                                    @endif">
+                                                    {{ $invitation->proposal->status }}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div>
+                                        <h4 class="text-lg font-bold text-white mb-3">Deskripsi Proposal</h4>
+                                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                            <p class="text-gray-300 text-sm whitespace-pre-line">{{ $invitation->proposal->description }}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Funding Goal -->
+                                    <div class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-indigo-500/30">
+                                        <p class="text-sm font-bold text-indigo-300 mb-2">Target Pendanaan</p>
+                                        <p class="text-3xl font-extrabold text-white">Rp {{ number_format($invitation->proposal->funding_goal, 0, ',', '.') }}</p>
+                                    </div>
+
+                                    <!-- Download Button -->
+                                    @if($invitation->proposal->file_path)
+                                    <div>
+                                        <a href="{{ asset('storage/' . $invitation->proposal->file_path) }}"
+                                           target="_blank"
+                                           class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                            Unduh Dokumen Proposal Lengkap
+                                        </a>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -230,51 +277,6 @@
         </div>
     </div>
 
-    <!-- Proposal Detail Modal -->
-    <div id="proposal-modal" class="fixed inset-0 z-50 hidden">
-        <div class="fixed inset-0 bg-black bg-opacity-50"></div>
-        <div class="fixed inset-0 flex items-center justify-center p-4">
-            <div class="glass-card text-gray-100 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
-                <!-- Modal Header -->
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-bold text-white" id="modal-title">Detail Proposal</h2>
-                        <button id="close-modal" class="text-white hover:text-gray-200 transition-colors duration-200">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Modal Body -->
-                <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]" id="modal-content">
-                    <!-- Content will be populated by JavaScript -->
-                </div>
-
-                <!-- Modal Footer -->
-                        <div class="px-6 py-4 border-t border-white/10 bg-slate-800/60">
-                    <div class="flex justify-between items-center">
-                        <div class="text-sm text-gray-300">
-                            <span id="modal-status"></span>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button id="modal-close-btn" class="px-4 py-2 btn-ghost rounded-lg transition-colors duration-200">
-                                Tutup
-                            </button>
-                            <button id="modal-interested-btn" class="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-200" style="display: none;">
-                                Tandai Tertarik
-                            </button>
-                            <button id="modal-not-interested-btn" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200" style="display: none;">
-                                Tandai Tidak Tertarik
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('search-proposals');
@@ -282,12 +284,6 @@
             const categoryFilter = document.getElementById('category-filter');
             const clearFiltersBtn = document.getElementById('clear-filters');
             const proposalCards = document.querySelectorAll('.proposal-card');
-            const proposalModal = document.getElementById('proposal-modal');
-            const modalContent = document.getElementById('modal-content');
-            const modalTitle = document.getElementById('modal-title');
-            const modalStatus = document.getElementById('modal-status');
-            const closeModalBtn = document.getElementById('close-modal');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
 
             // Filter functionality
             function filterProposals() {
@@ -302,11 +298,11 @@
                     const status = card.dataset.status;
                     const category = card.dataset.category;
 
-                    const matchesSearch = !searchTerm || 
-                        title.includes(searchTerm) || 
-                        student.includes(searchTerm) || 
+                    const matchesSearch = !searchTerm ||
+                        title.includes(searchTerm) ||
+                        student.includes(searchTerm) ||
                         university.includes(searchTerm);
-                    
+
                     const matchesStatus = !statusValue || status === statusValue;
                     const matchesCategory = !categoryValue || category === categoryValue;
 
@@ -328,67 +324,6 @@
                 statusFilter.value = '';
                 categoryFilter.value = '';
                 filterProposals();
-            });
-
-            // Modal functionality
-            function openModal(proposalId) {
-                modalTitle.textContent = 'Detail Proposal';
-                modalContent.innerHTML = `
-                    <div class="text-center py-8">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto mb-4"></div>
-                        <p class="text-gray-300">Memuat detail proposal...</p>
-                    </div>
-                `;
-                proposalModal.classList.remove('hidden');
-                
-                // Simulate loading and show content
-                setTimeout(() => {
-                    modalContent.innerHTML = `
-                        <div class="space-y-6">
-                            <div class="bg-slate-800 rounded-lg p-4">
-                                <h3 class="text-lg font-semibold text-white mb-3">Informasi Mahasiswa</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-sm text-gray-300">Nama</p>
-                                        <p class="font-medium">Proposal ID: ${proposalId}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-300">Universitas</p>
-                                        <p class="font-medium">Data akan dimuat dari database</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-indigo-900/20 rounded-lg p-4">
-                                <h3 class="text-lg font-semibold text-white mb-3">Detail Proposal</h3>
-                                <p class="text-gray-200">Detail lengkap proposal akan ditampilkan di sini.</p>
-                            </div>
-                        </div>
-                    `;
-                }, 1000);
-            }
-
-            // Event listeners for modal
-            document.querySelectorAll('.view-proposal-detail').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const proposalId = this.dataset.proposalId;
-                    openModal(proposalId);
-                });
-            });
-
-            closeModalBtn.addEventListener('click', function() {
-                proposalModal.classList.add('hidden');
-            });
-
-            modalCloseBtn.addEventListener('click', function() {
-                proposalModal.classList.add('hidden');
-            });
-
-            // Close modal when clicking outside
-            proposalModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    proposalModal.classList.add('hidden');
-                }
             });
 
             // Action buttons
