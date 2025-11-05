@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="mt-8 border-t border-white/10 pt-6 flex items-center gap-4">
-                         @if(auth()->user()->savedProposals->contains($proposal))
+                        @if(auth()->user()->savedProposals->contains($proposal) && !$hasDealed)
                             <form action="{{ route('sponsor.proposals.unsave', $proposal) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -90,21 +90,30 @@
                                     ✓ Disimpan
                                 </button>
                             </form>
-                        @else
+                            <form action="{{ route('sponsor.deals.initiate', $proposal) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="px-6 py-2 btn-gradient text-white font-semibold rounded-lg shadow-md">
+                                    Mulai Deal
+                                </button>
+                            </form>
+                        @elseif(!$hasDealed)
                              <form action="{{ route('sponsor.proposals.save', $proposal) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="px-4 py-2 btn-ghost text-gray-200 font-semibold rounded-lg">
                                     + Simpan Proposal
                                 </button>
                             </form>
+                            <form action="{{ route('sponsor.deals.initiate', $proposal) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="px-6 py-2 btn-gradient text-white font-semibold rounded-lg shadow-md">
+                                    Mulai Deal
+                                </button>
+                            </form>
+                        @elseif($hasDealed)
+                            <a href="{{ route('sponsor.deals.index') }}" class="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md">
+                                ✓ Dealed
+                            </a>
                         @endif
-
-                        <form action="{{ route('sponsor.deals.initiate', $proposal) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="px-6 py-2 btn-gradient text-white font-semibold rounded-lg shadow-md">
-                                Mulai Deal
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>

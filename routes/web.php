@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified', 'sponsor'])->prefix('sponsor')->name('spo
     Route::get('/proposals/{proposal}', [ProposalController::class, 'show'])->name('proposals.show');
     Route::post('/proposals/{proposal}/save', [ProposalController::class, 'save'])->name('proposals.save');
     Route::delete('/proposals/{proposal}/unsave', [ProposalController::class, 'unsave'])->name('proposals.unsave');
+    Route::get('/deals', [DealController::class, 'index'])->name('deals.index');
     Route::post('/deals/{proposal}/initiate', [DealController::class, 'initiate'])->name('deals.initiate');
 });
 

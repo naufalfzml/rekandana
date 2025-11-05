@@ -18,6 +18,9 @@ class SponsorController extends Controller
                            ->latest()
                            ->paginate(10);
 
+        // Ambil semua proposal_id yang sudah di-deal oleh sponsor ini
+        $dealedProposalIds = auth()->user()->deals()->pluck('proposal_id')->toArray();
+
         // Mengambil semua perusahaan/sponsor untuk dropdown (jika diperlukan)
         $companies = \App\Models\User::where('role', 'sponsor')
                                     ->where('id', '!=', auth()->id())
@@ -26,7 +29,7 @@ class SponsorController extends Controller
         // Mengambil proposal user yang login (jika user adalah mahasiswa)
         $userProposals = collect(); // Empty collection sebagai default
 
-        return view('sponsor.proposal.direct', compact('directProposals', 'companies', 'userProposals'));
+        return view('sponsor.proposal.direct', compact('directProposals', 'companies', 'userProposals', 'dealedProposalIds'));
     }
 
     public function showDirect(ProposalInvitation $direct)
@@ -41,8 +44,11 @@ class SponsorController extends Controller
             abort(404, 'Proposal tidak ditemukan atau belum disetujui.');
         }
 
+        // Cek apakah sponsor sudah deal dengan proposal ini
+        $hasDealed = auth()->user()->deals()->where('proposal_id', $direct->proposal_id)->exists();
+
         // Kirim data undangan ke view baru yang akan kita buat
-        return view('sponsor.directs.show', compact('direct'));
+        return view('sponsor.directs.show', compact('direct', 'hasDealed'));
     }
 
     public function saveDirectProposal(ProposalInvitation $invitation)

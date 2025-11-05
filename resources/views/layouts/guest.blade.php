@@ -19,7 +19,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                 <a href="/">
-                   <img src="{{ asset('storage/logo-rekandana.png') }}" alt="" class="w-20 mt-8 drop-shadow"/>
+                   <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="" class="w-20 mt-8 drop-shadow"/>
                 </a>
             </div>
 

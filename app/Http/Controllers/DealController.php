@@ -28,4 +28,15 @@ class DealController extends Controller
 
         return back()->with('success', 'Deal berhasil dimulai! Pengaju proposal akan segera dihubungi.');
     }
+
+    public function index()
+    {
+        // Ambil semua deals dari sponsor yang login dengan eager loading
+        $dealedProposals = auth()->user()->deals()
+            ->with('user') // Load data mahasiswa pemilik proposal
+            ->latest('deals.created_at') // Sort berdasarkan waktu deal dibuat
+            ->paginate(10);
+
+        return view('sponsor.deals.index', compact('dealedProposals'));
+    }
 }

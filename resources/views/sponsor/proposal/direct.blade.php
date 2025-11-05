@@ -128,7 +128,11 @@
 
                                         <!-- Right: Action Buttons -->
                                         <div class="flex gap-2 ml-6">
-                                            @if(($invitation->status ?? 'pending') === 'pending')
+                                            @if(in_array($invitation->proposal->id, $dealedProposalIds))
+                                                <a href="{{ route('sponsor.deals.index') }}" class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg">
+                                                    ✓ Dealed
+                                                </a>
+                                            @elseif(($invitation->status ?? 'pending') === 'pending')
                                                 <button class="mark-interested px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200"
                                                         data-invitation-id="{{ $invitation->id }}"
                                                         data-proposal-id="{{ $invitation->proposal->id }}">
@@ -139,13 +143,15 @@
                                                     Tolak
                                                 </button>
                                             @elseif(($invitation->status ?? '') === 'interested')
-                                                <a href="{{ route('sponsor.deals.initiate', $invitation->proposal->id) }}"
-                                                   class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200">
-                                                    <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                    </svg>
-                                                    Mulai Deal
-                                                </a>
+                                                <form action="{{ route('sponsor.deals.initiate', $invitation->proposal) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200">
+                                                        <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                        </svg>
+                                                        Mulai Deal
+                                                    </button>
+                                                </form>
                                             @endif
                                         </div>
                                     </div>
@@ -368,17 +374,18 @@
                                 card.dataset.status = 'interested';
 
                                 // Replace action buttons with "Mulai Deal" button
-                                const actionButtonsContainer = this.closest('.action-buttons');
+                                const actionButtonsContainer = this.parentElement;
                                 if (actionButtonsContainer) {
-                                    const dealUrl = `/sponsor/deals/${proposalId}/initiate`;
-                                    actionButtonsContainer.outerHTML = `
-                                        <a href="${dealUrl}"
-                                           class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 text-center inline-block">
-                                            <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                            Mulai Deal
-                                        </a>
+                                    actionButtonsContainer.innerHTML = `
+                                        <form action="/sponsor/deals/${proposalId}/initiate" method="POST">
+                                            <input type="hidden" name="_token" value="${csrfToken.content}">
+                                            <button type="submit" class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-200">
+                                                <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                Mulai Deal
+                                            </button>
+                                        </form>
                                     `;
                                 }
 

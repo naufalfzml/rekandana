@@ -9,7 +9,7 @@
                 <div class="flex">
                     <div class="shrink-0 flex items-center">
                         <a href="/">
-                            <img src="{{ asset('storage/logo-rekandana.png') }}" alt="" class="w-16 drop-shadow">
+                            <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="Rekandana Logo" class="w-12 drop-shadow">
                         </a>
                     </div>
 
@@ -36,6 +36,9 @@
                             </x-nav-link>
                             <x-nav-link :href="route('sponsor.proposals.saved')" :active="request()->routeIs('sponsor.proposals.saved')">
                                 Disimpan
+                            </x-nav-link>
+                            <x-nav-link :href="route('sponsor.deals.index')" :active="request()->routeIs('sponsor.deals.index')">
+                                Proposal Dealed
                             </x-nav-link>
                         @elseif(auth()->user()->role === 'admin')
                             <x-nav-link :href="route('admin.proposals.index')" :active="request()->routeIs('admin.proposals.index')">

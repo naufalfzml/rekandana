@@ -14,12 +14,28 @@ class ProposalController extends Controller
             abort(403);
         }
 
-        $proposals = Proposal::where('status', 'approved')->latest()->paginate(12);
-        
-        // Get unique categories and fields for filter dropdowns
-        $categories = Proposal::where('status', 'approved')->distinct()->pluck('kategori')->filter()->sort()->values();
-        $fields = Proposal::where('status', 'approved')->distinct()->pluck('bidang')->filter()->sort()->values();
-        
+        // Hanya tampilkan proposal yang approved DAN bukan direct
+        $proposals = Proposal::where('status', 'approved')
+                            ->where('is_direct', false)
+                            ->latest()
+                            ->paginate(12);
+
+        // Get unique categories and fields for filter dropdowns (hanya untuk proposal umum)
+        $categories = Proposal::where('status', 'approved')
+                            ->where('is_direct', false)
+                            ->distinct()
+                            ->pluck('kategori')
+                            ->filter()
+                            ->sort()
+                            ->values();
+        $fields = Proposal::where('status', 'approved')
+                        ->where('is_direct', false)
+                        ->distinct()
+                        ->pluck('bidang')
+                        ->filter()
+                        ->sort()
+                        ->values();
+
         return view('sponsor.proposal.index', compact('proposals', 'categories', 'fields'));
     }
     public function create()
@@ -72,6 +88,7 @@ class ProposalController extends Controller
             'funding_goal' => $request->funding_goal,
             'file_path' => $filePath,
             'status' => 'pending',
+            'is_direct' => $request->filled('target_sponsor_id'), // true jika direct
             'kategori' => $request->kategori,
             'bidang' => $request->bidang,
             'tanggal_acara' => $request->tanggal_acara,
@@ -94,7 +111,7 @@ class ProposalController extends Controller
             $sponsor = User::find($request->target_sponsor_id);
             $sponsorName = $sponsor ? $sponsor->company_name : 'sponsor';
 
-            return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan! Proposal Anda telah dikirim langsung ke {$sponsorName} dan juga akan muncul di daftar proposal umum setelah disetujui admin. Sisa kuota direct proposal: {$remainingQuota}");
+            return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan langsung ke {$sponsorName}! Proposal ini hanya akan terlihat oleh sponsor tersebut. Sisa kuota direct proposal: {$remainingQuota}");
         }
 
         return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan! Proposal Anda akan direview oleh tim admin dan kemudian akan muncul di daftar proposal untuk semua sponsor.");
@@ -124,10 +141,13 @@ class ProposalController extends Controller
     {
         // Pastikan hanya sponsor yang bisa melihat detail proposal yang sudah di-approve
         if ($proposal->status !== 'approved') {
-            abort(404); 
+            abort(404);
         }
-        
-        return view('sponsor.proposal.show', compact('proposal'));
+
+        // Cek apakah sponsor sudah deal dengan proposal ini
+        $hasDealed = auth()->user()->deals()->where('proposal_id', $proposal->id)->exists();
+
+        return view('sponsor.proposal.show', compact('proposal', 'hasDealed'));
     }
 
     //Menampilkan daftar proposal yang disimpan oleh sponsor
@@ -141,7 +161,9 @@ class ProposalController extends Controller
     //Search Proposal (Sponsor)
     public function search(Request $request)
     {
-        $query = Proposal::where('status', 'approved');
+        // Hanya tampilkan proposal yang approved DAN bukan direct
+        $query = Proposal::where('status', 'approved')
+                        ->where('is_direct', false);
         
         // Search filter
         if ($request->filled('search')) {

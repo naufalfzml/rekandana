@@ -103,6 +103,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $role,
+            'no_hp' => $request->no_hp,
             'referral_code_id' => $role === 'sponsor' ? $referralCode->id : null,
             'university' => $request->university,
             'nim' => $request->nim,

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Proposal extends Model
 {
     protected $fillable = [
-        'user_id', 
-        'title', 
-        'description', 
+        'user_id',
+        'title',
+        'description',
         'funding_goal',
         'file_path',
         'status',
+        'is_direct',
         'kategori',
         'bidang',
         'penyelenggara',

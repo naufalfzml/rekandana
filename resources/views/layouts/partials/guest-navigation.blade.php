@@ -4,10 +4,10 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <img src="{{ asset('storage/logo-rekandana.png') }}" alt="" class="w-16 drop-shadow">
+                    <a href="/" class="flex-shrink-0 flex items-center">
+                        <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="" class="w-16 drop-shadow">
                         <span class="ml-2 text-xl font-semibold text-gray-100">Rekandana</span>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Navigation Menu -->
