@@ -16,14 +16,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-app text-gray-100">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-            <div>
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-4 sm:pt-6 pb-8 sm:pb-10">
+            <div class="mb-4 sm:mb-0">
                 <a href="/">
-                   <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="" class="w-20 mt-8 drop-shadow"/>
+                   <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="" class="w-16 sm:w-20 mt-4 sm:mt-8 drop-shadow"/>
                 </a>
             </div>
 
-            <div class="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl mt-6 px-4 sm:px-6 py-6 glass-card overflow-hidden rounded-xl neon-border mb-10 mx-4">
+            <div class="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl mt-2 sm:mt-6 px-3 sm:px-6 py-4 sm:py-6 glass-card rounded-xl neon-border mb-4 sm:mb-10 mx-2 sm:mx-4">
                 {{ $slot }}
             </div>
         </div>
