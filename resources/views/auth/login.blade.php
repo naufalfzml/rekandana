@@ -7,9 +7,9 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-1 mb-6">
-        <h2 class="text-2xl font-bold flex justify-center pb-2 text-white">Masuk</h2>
-        <p class="flex justify-center text-gray-300">Masukkan email dan password untuk melanjutkan</p>
+    <div class="mb-6">
+        <h2 class="text-xl sm:text-2xl font-bold text-center pb-2 text-white">Masuk</h2>
+        <p class="text-sm sm:text-base text-center text-gray-300 px-2">Masukkan email dan password untuk melanjutkan</p>
     </div>
 
     <form method="POST" action="{{ route('login') }}">
@@ -24,10 +24,10 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <div class="flex justify-between items-center">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-1 sm:gap-0">
                 <x-input-label for="password" :value="__('Password')" />
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-300 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                    <a class="underline text-xs sm:text-sm text-gray-300 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Lupa password?') }}
                     </a>
                 @endif
@@ -53,8 +53,8 @@
             </x-primary-button>
         </div>
 
-        <div class="flex justify-center space-x-1 mt-4">
-            <p>Belum punya akun?</p>
+        <div class="flex flex-wrap justify-center items-center gap-1 mt-4 text-sm sm:text-base">
+            <p class="text-gray-300">Belum punya akun?</p>
             <a href="/register" class="hover:underline text-indigo-300">Daftar sekarang</a>
         </div>
     </form>

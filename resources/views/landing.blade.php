@@ -263,8 +263,8 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-                <p class="text-xl text-gray-300">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg md:text-xl text-gray-300">
                     Temukan jawaban untuk pertanyaan yang sering diajukan
                 </p>
             </div>
@@ -277,7 +277,7 @@
                         @click="activeIndex = activeIndex === 0 ? null : 0"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apa itu platform Rekandana?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apa itu platform Rekandana?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 0 }"
@@ -305,7 +305,7 @@
                         @click="activeIndex = activeIndex === 1 ? null : 1"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Bagaimana cara mengajukan proposal?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Bagaimana cara mengajukan proposal?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 1 }"
@@ -333,7 +333,7 @@
                         @click="activeIndex = activeIndex === 2 ? null : 2"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah pengajuan proposal harus membayar?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah pengajuan proposal harus membayar?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 2 }"
@@ -361,7 +361,7 @@
                         @click="activeIndex = activeIndex === 3 ? null : 3"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah proposal saya aman dan tidak disalahgunakan?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah proposal saya aman dan tidak disalahgunakan?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 3 }"
@@ -389,7 +389,7 @@
                         @click="activeIndex = activeIndex === 4 ? null : 4"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah platform mengambil komisi dari transaksi sponsorship?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah platform mengambil komisi dari transaksi sponsorship?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 4 }"
@@ -417,7 +417,7 @@
                         @click="activeIndex = activeIndex === 5 ? null : 5"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Bagaimana jika perusahaan tertarik dengan proposal saya?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Bagaimana jika perusahaan tertarik dengan proposal saya?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 5 }"
@@ -445,7 +445,7 @@
                         @click="activeIndex = activeIndex === 6 ? null : 6"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah sponsorship harus dalam bentuk uang tunai?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah sponsorship harus dalam bentuk uang tunai?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 6 }"
@@ -473,7 +473,7 @@
                         @click="activeIndex = activeIndex === 7 ? null : 7"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Siapa saja yang bisa mengajukan proposal?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Siapa saja yang bisa mengajukan proposal?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 7 }"
@@ -503,10 +503,10 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="rounded-3xl p-12 text-center">
                 <div class="mb-8">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
                         Siap Memulai <span class="text-gradient">Kolaborasi</span>?
                     </h2>
-                    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
                         Bergabunglah dengan ratusan mahasiswa dan perusahaan yang telah sukses berkolaborasi di Rekandana
                     </p>
                 </div>
@@ -545,58 +545,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8 md:py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Main Footer Content -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
-                <!-- Brand Section -->
-                <div class="col-span-1 sm:col-span-2 lg:col-span-1">
-                    <div class="flex items-center mb-4">
-                        <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="Rekandana Logo" class="w-10 md:w-12 drop-shadow">
-                        <span class="ml-2 text-lg md:text-xl font-semibold">Rekandana</span>
-                    </div>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed pr-0 lg:pr-4">
-                        Platform terpercaya untuk menghubungkan proposal dengan sponsor terbaik di Indonesia.
-                    </p>
-                </div>
-
-                <!-- Product Links -->
-                <div>
-                    <h4 class="font-semibold mb-3 md:mb-4 text-base md:text-lg">Produk</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm md:text-base">
-                        <li><a href="#fitur" class="hover:text-white transition-colors">Fitur</a></li>
-                        <li><a href="#carakerja" class="hover:text-white transition-colors">Cara Kerja</a></li>
-                        <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <!-- Company Links -->
-                <div>
-                    <h4 class="font-semibold mb-3 md:mb-4 text-base md:text-lg">Perusahaan</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm md:text-base">
-                        <li><a href="#" class="hover:text-white transition-colors">Tentang Kami</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Karir</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                    </ul>
-                </div>
-
-                <!-- Support Links -->
-                <div>
-                    <h4 class="font-semibold mb-3 md:mb-4 text-base md:text-lg">Dukungan</h4>
-                    <ul class="space-y-2 text-gray-400 text-sm md:text-base">
-                        <li><a href="#" class="hover:text-white transition-colors">Bantuan</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Dokumentasi</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Kontak</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Copyright Section -->
-            <div class="border-t border-gray-800 mt-8 md:mt-10 pt-6 md:pt-8 text-center">
-                <p class="text-gray-400 text-xs md:text-sm">&copy; 2025 Rekandana. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    @include('layouts.partials.footer')
 
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

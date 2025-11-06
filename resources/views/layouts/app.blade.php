@@ -16,7 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-app text-gray-100">
-        <div class="min-h-screen">
+        <div class="min-h-screen flex flex-col">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -29,9 +29,12 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="px-4 sm:px-6 lg:px-8 py-6">
+            <main class="flex-grow">
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            @include('layouts.partials.footer')
         </div>
 
         <!-- Toast Notification Container -->

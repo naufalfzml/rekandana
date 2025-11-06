@@ -35,6 +35,19 @@ class ProposalController extends Controller
         return back()->with('warning', "Proposal '{$proposal->title}' ditolak. Notifikasi email telah dikirim ke {$proposal->user->name}.");
     }
 
+    public function viewDocument(Proposal $proposal) {
+        $filePath = storage_path('app/public/' . $proposal->file_path);
+
+        if (!file_exists($filePath)) {
+            abort(404, 'Dokumen tidak ditemukan');
+        }
+
+        return response()->file($filePath, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . basename($filePath) . '"',
+        ]);
+    }
+
     public function history(Request $request) {
         $query = Proposal::where('status', 'approved')->with('user');
 

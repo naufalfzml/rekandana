@@ -9,7 +9,7 @@
                 <div class="flex">
                     <div class="shrink-0 flex items-center">
                         <a href="/">
-                            <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="Rekandana Logo" class="w-12 drop-shadow">
+                            <img src="{{ asset('storage/logos/logo-rekandana-polos.png') }}" alt="Rekandana Logo" class="w-12 sm:w-16 drop-shadow">
                         </a>
                     </div>
 
@@ -99,10 +99,44 @@
 
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="url('/')" :active="request()->is('/')">
+                    Home
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
-                </div>
+                @if(auth()->user()->role === 'mahasiswa')
+                    <x-responsive-nav-link :href="route('mahasiswa.proposals.create')" :active="request()->routeIs('mahasiswa.proposals.create')">
+                        Ajukan Proposal
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('mahasiswa.proposals.index')" :active="request()->routeIs('mahasiswa.proposals.index')">
+                        Proposal Saya
+                    </x-responsive-nav-link>
+                @elseif(auth()->user()->role === 'sponsor')
+                    <x-responsive-nav-link :href="route('sponsor.proposals.index')" :active="request()->routeIs('sponsor.proposals.index')">
+                        Cari Proposal
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('sponsor.proposals.direct')" :active="request()->routeIs('sponsor.proposals.direct')">
+                        Direct Proposal
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('sponsor.proposals.saved')" :active="request()->routeIs('sponsor.proposals.saved')">
+                        Disimpan
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('sponsor.deals.index')" :active="request()->routeIs('sponsor.deals.index')">
+                        Proposal Dealed
+                    </x-responsive-nav-link>
+                @elseif(auth()->user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('admin.proposals.index')" :active="request()->routeIs('admin.proposals.index')">
+                        Moderasi Proposal
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.proposals.history')" :active="request()->routeIs('admin.proposals.history')">
+                        History Proposal
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.referral-codes.index')" :active="request()->routeIs('admin.referral-codes.*')">
+                        Kode Referral
+                    </x-responsive-nav-link>
+                @endif
+            </div>
 
             <div class="pt-4 pb-1 border-t border-white/10">
                 <div class="px-4">

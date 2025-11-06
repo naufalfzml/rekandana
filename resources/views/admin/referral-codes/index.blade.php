@@ -4,14 +4,17 @@
             <h2 class="font-semibold text-xl text-gray-100 leading-tight">
                 Kelola Kode Referral
             </h2>
-            <a href="{{ route('admin.referral-codes.create') }}" class="px-4 py-2 btn-gradient text-white rounded-lg transition">
-                + Buat Kode Baru
-            </a>
         </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-6">
+                <a href="{{ route('admin.referral-codes.create') }}" class="px-4 py-2 btn-gradient text-white rounded-lg transition inline-block">
+                    + Buat Kode Baru
+                </a>
+            </div>
+
             <div class="glass-card overflow-hidden sm:rounded-xl">
                 <div class="p-6 text-gray-100">
 
