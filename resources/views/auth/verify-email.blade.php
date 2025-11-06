@@ -10,9 +10,9 @@
     </div>
 
     @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-xs sm:text-sm text-emerald-400">
-            {{ __('Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran.') }}
-        </div>
+    <div class="mb-4 font-medium text-xs sm:text-sm text-emerald-400">
+        {{ __('Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran.') }}
+    </div>
     @endif
 
     <div class="mt-4 mb-2 flex flex-col sm:flex-row items-center justify-between gap-3 pb-4 sm:pb-0">
