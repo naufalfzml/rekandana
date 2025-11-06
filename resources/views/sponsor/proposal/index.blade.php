@@ -180,7 +180,7 @@
                                 
                                 @if(request('search'))
                                     <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-indigo-900/30 text-indigo-300">
-                                        <span class="hidden sm:inline">Pencarian: </span>"{{ Str::limit(request('search'), 20) }}"
+                                        <span class="hidden sm:inline">Pencarian: </span>"{{ \Illuminate\Support\Str::limit(request('search'), 20) }}"
                                         <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-indigo-300 text-sm">×</a>
                                     </span>
                                 @endif
@@ -194,7 +194,7 @@
 
                                 @if(request('bidang'))
                                     <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-300">
-                                        <span class="hidden sm:inline">Bidang: </span>{{ Str::limit(request('bidang'), 15) }}
+                                        <span class="hidden sm:inline">Bidang: </span>{{ \Illuminate\Support\Str::limit(request('bidang'), 15) }}
                                         <a href="{{ request()->fullUrlWithQuery(['bidang' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-purple-300 text-sm">×</a>
                                     </span>
                                 @endif
