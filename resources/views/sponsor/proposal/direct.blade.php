@@ -38,8 +38,8 @@
                         </div>
                         
                         <!-- Filters -->
-                        <div class="flex gap-3">
-                            <select id="status-filter" class="px-4 py-3 select-dark rounded-lg">
+                        <div class="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-end">
+                            <select id="status-filter" class="px-4 py-3 select-dark rounded-lg w-full sm:w-auto">
                                 <option value="">Semua Status</option>
                                 <option value="pending">Menunggu Review</option>
                                 <option value="reviewed">Sudah Direview</option>
@@ -47,7 +47,7 @@
                                 <option value="not_interested">Tidak Tertarik</option>
                             </select>
                             
-                            <select id="category-filter" class="px-4 py-3 select-dark rounded-lg">
+                            <select id="category-filter" class="px-4 py-3 select-dark rounded-lg w-full sm:w-auto">
                                 <option value="">Semua Kategori</option>
                                 <option value="Teknologi">Teknologi</option>
                                 <option value="Pendidikan">Pendidikan</option>
@@ -57,7 +57,7 @@
                                 <option value="Lainnya">Lainnya</option>
                             </select>
                             
-                            <button id="clear-filters" class="px-4 py-3 btn-ghost rounded-lg transition-colors duration-200">
+                            <button id="clear-filters" class="px-4 py-3 btn-ghost rounded-lg transition-colors duration-200 w-full sm:w-auto">
                                 Reset
                             </button>
                         </div>

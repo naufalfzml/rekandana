@@ -63,9 +63,9 @@
                         <div>
                             <x-input-label for="funding_goal" value="Target Dana yang Dibutuhkan (Rp)" />
                             <x-text-input id="funding_goal" name="funding_goal" type="number" class="mt-1 block w-full" :value="old('funding_goal')" placeholder="Contoh: 5000000" />
-                             <x-input-error class="mt-2" :messages="$errors->get('funding_goal')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('funding_goal')" />
                         </div>
-                        
+
                         <div>
                             <x-input-label for="proposal_file" value="Upload Dokumen Proposal (PDF - Max 5MB)" />
                             <input id="proposal_file" name="proposal_file" type="file" accept=".pdf,application/pdf" class="mt-1 block w-full text-xs sm:text-sm text-gray-300 file:mr-2 sm:file:mr-4 file:py-1.5 sm:file:py-2 file:px-3 sm:file:px-4 file:rounded-full file:border-0 file:text-xs sm:file:text-sm file:font-semibold file:bg-slate-800 file:text-gray-200 hover:file:bg-slate-700" required>
@@ -78,7 +78,7 @@
                             <x-text-input id="link_sosmed" name="link_sosmed" type="text" class="mt-1 block w-full" :value="old('link_sosmed')" placeholder="Contoh: https://instagram.com/nama_acara"/>
                             <x-input-error class="mt-2" :messages="$errors->get('link_sosmed')" />
                         </div>
-                    <!-- Taruh di dalam <form> -->
+                        <!-- Taruh di dalam <form> -->
                         <div>
                             <x-input-label for="target_sponsor_id" value="Kirim Langsung ke Perusahaan (Opsional)" />
 
@@ -125,4 +125,6 @@
             </div>
         </div>
     </div>
+
+
 </x-app-layout>

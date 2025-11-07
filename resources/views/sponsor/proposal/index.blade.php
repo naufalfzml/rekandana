@@ -16,20 +16,20 @@
                         </svg>
                         <h3 class="text-base sm:text-lg font-semibold text-white">Cari & Filter Proposal</h3>
                     </div>
-                    
+
                     <form action="{{ route('sponsor.proposals.search') }}" method="GET" id="filter-form">
                         <!-- Search Bar -->
                         <div class="mb-4 sm:mb-6">
                             <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                                 <div class="flex-1">
                                     <input type="text"
-                                           name="search"
-                                           value="{{ request('search') }}"
-                                           class="w-full px-3 py-2.5 sm:px-4 sm:py-3 input-dark rounded-lg transition-all duration-200 text-sm sm:text-base"
-                                           placeholder="Cari proposal...">
+                                        name="search"
+                                        value="{{ request('search') }}"
+                                        class="w-full px-3 py-2.5 sm:px-4 sm:py-3 input-dark rounded-lg transition-all duration-200 text-sm sm:text-base"
+                                        placeholder="Cari proposal...">
                                 </div>
                                 <button type="submit"
-                                        class="px-4 py-2.5 sm:px-6 sm:py-3 btn-gradient text-white font-semibold rounded-lg focus:ring-2 focus:ring-indigo-500 transition-all duration-200 flex items-center justify-center text-sm sm:text-base whitespace-nowrap">
+                                    class="px-4 py-2.5 sm:px-6 sm:py-3 btn-gradient text-white font-semibold rounded-lg focus:ring-2 focus:ring-indigo-500 transition-all duration-200 flex items-center justify-center text-sm sm:text-base whitespace-nowrap">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -79,18 +79,18 @@
                                         <select name="kategori" class="w-full px-2.5 py-2 sm:px-3 sm:py-2 select-dark rounded-lg text-sm sm:text-base">
                                             <option value="">Semua Kategori</option>
                                             @if(isset($categories))
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category }}" {{ request('kategori') == $category ? 'selected' : '' }}>
-                                                        {{ $category }}
-                                                    </option>
-                                                @endforeach
+                                            @foreach($categories as $category)
+                                            <option value="{{ $category }}" {{ request('kategori') == $category ? 'selected' : '' }}>
+                                                {{ $category }}
+                                            </option>
+                                            @endforeach
                                             @else
-                                                <option value="Teknologi" {{ request('kategori') == 'Teknologi' ? 'selected' : '' }}>Teknologi</option>
-                                                <option value="Pendidikan" {{ request('kategori') == 'Pendidikan' ? 'selected' : '' }}>Pendidikan</option>
-                                                <option value="Kesehatan" {{ request('kategori') == 'Kesehatan' ? 'selected' : '' }}>Kesehatan</option>
-                                                <option value="Lingkungan" {{ request('kategori') == 'Lingkungan' ? 'selected' : '' }}>Lingkungan</option>
-                                                <option value="Sosial" {{ request('kategori') == 'Sosial' ? 'selected' : '' }}>Sosial</option>
-                                                <option value="Lainnya" {{ request('kategori') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                            <option value="Teknologi" {{ request('kategori') == 'Teknologi' ? 'selected' : '' }}>Teknologi</option>
+                                            <option value="Pendidikan" {{ request('kategori') == 'Pendidikan' ? 'selected' : '' }}>Pendidikan</option>
+                                            <option value="Kesehatan" {{ request('kategori') == 'Kesehatan' ? 'selected' : '' }}>Kesehatan</option>
+                                            <option value="Lingkungan" {{ request('kategori') == 'Lingkungan' ? 'selected' : '' }}>Lingkungan</option>
+                                            <option value="Sosial" {{ request('kategori') == 'Sosial' ? 'selected' : '' }}>Sosial</option>
+                                            <option value="Lainnya" {{ request('kategori') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                                             @endif
                                         </select>
                                     </div>
@@ -101,18 +101,18 @@
                                         <select name="bidang" class="w-full px-2.5 py-2 sm:px-3 sm:py-2 select-dark rounded-lg text-sm sm:text-base">
                                             <option value="">Semua Bidang</option>
                                             @if(isset($fields))
-                                                @foreach($fields as $field)
-                                                    <option value="{{ $field }}" {{ request('bidang') == $field ? 'selected' : '' }}>
-                                                        {{ $field }}
-                                                    </option>
-                                                @endforeach
+                                            @foreach($fields as $field)
+                                            <option value="{{ $field }}" {{ request('bidang') == $field ? 'selected' : '' }}>
+                                                {{ $field }}
+                                            </option>
+                                            @endforeach
                                             @else
-                                                <option value="AI & Machine Learning" {{ request('bidang') == 'AI & Machine Learning' ? 'selected' : '' }}>AI & Machine Learning</option>
-                                                <option value="Web Development" {{ request('bidang') == 'Web Development' ? 'selected' : '' }}>Web Development</option>
-                                                <option value="Mobile Development" {{ request('bidang') == 'Mobile Development' ? 'selected' : '' }}>Mobile Development</option>
-                                                <option value="Data Science" {{ request('bidang') == 'Data Science' ? 'selected' : '' }}>Data Science</option>
-                                                <option value="Cybersecurity" {{ request('bidang') == 'Cybersecurity' ? 'selected' : '' }}>Cybersecurity</option>
-                                                <option value="IoT" {{ request('bidang') == 'IoT' ? 'selected' : '' }}>IoT</option>
+                                            <option value="AI & Machine Learning" {{ request('bidang') == 'AI & Machine Learning' ? 'selected' : '' }}>AI & Machine Learning</option>
+                                            <option value="Web Development" {{ request('bidang') == 'Web Development' ? 'selected' : '' }}>Web Development</option>
+                                            <option value="Mobile Development" {{ request('bidang') == 'Mobile Development' ? 'selected' : '' }}>Mobile Development</option>
+                                            <option value="Data Science" {{ request('bidang') == 'Data Science' ? 'selected' : '' }}>Data Science</option>
+                                            <option value="Cybersecurity" {{ request('bidang') == 'Cybersecurity' ? 'selected' : '' }}>Cybersecurity</option>
+                                            <option value="IoT" {{ request('bidang') == 'IoT' ? 'selected' : '' }}>IoT</option>
                                             @endif
                                         </select>
                                     </div>
@@ -135,20 +135,20 @@
                                     <div>
                                         <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">Dana Minimum (Rp)</label>
                                         <input type="number"
-                                               name="funding_min"
-                                               value="{{ request('funding_min') }}"
-                                               class="w-full px-2.5 py-2 sm:px-3 sm:py-2 input-dark rounded-lg text-sm sm:text-base"
-                                               placeholder="0"
-                                               min="0">
+                                            name="funding_min"
+                                            value="{{ request('funding_min') }}"
+                                            class="w-full px-2.5 py-2 sm:px-3 sm:py-2 input-dark rounded-lg text-sm sm:text-base"
+                                            placeholder="0"
+                                            min="0">
                                     </div>
                                     <div>
                                         <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-1.5 sm:mb-2">Dana Maksimum (Rp)</label>
                                         <input type="number"
-                                               name="funding_max"
-                                               value="{{ request('funding_max') }}"
-                                               class="w-full px-2.5 py-2 sm:px-3 sm:py-2 input-dark rounded-lg text-sm sm:text-base"
-                                               placeholder="100000000"
-                                               min="0">
+                                            name="funding_max"
+                                            value="{{ request('funding_max') }}"
+                                            class="w-full px-2.5 py-2 sm:px-3 sm:py-2 input-dark rounded-lg text-sm sm:text-base"
+                                            placeholder="100000000"
+                                            min="0">
                                     </div>
                                 </div>
 
@@ -161,7 +161,7 @@
                                         Terapkan Filter
                                     </button>
                                     <a href="{{ route('sponsor.proposals.index') }}"
-                                       class="flex-1 sm:flex-none px-4 py-2 sm:px-6 sm:py-2 btn-ghost text-gray-200 font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center text-sm sm:text-base">
+                                        class="flex-1 sm:flex-none px-4 py-2 sm:px-6 sm:py-2 btn-ghost text-gray-200 font-semibold rounded-lg transition-colors duration-200 flex items-center justify-center text-sm sm:text-base">
                                         <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>
@@ -171,59 +171,59 @@
                             </div>
                         </div>
                     </form>
-                    
+
                     <!-- Active Filters Display -->
                     @if(request()->hasAny(['search', 'kategori', 'bidang', 'tanggal_acara', 'funding_min', 'funding_max', 'sort']))
-                        <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10">
-                            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                                <span class="text-xs sm:text-sm font-medium text-gray-200">Filter aktif:</span>
-                                
-                                @if(request('search'))
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-indigo-900/30 text-indigo-300">
-                                        <span class="hidden sm:inline">Pencarian: </span>"{{ Str::limit(request('search'), 20) }}"
-                                        <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-indigo-300 text-sm">×</a>
-                                    </span>
-                                @endif
+                    <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10">
+                        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                            <span class="text-xs sm:text-sm font-medium text-gray-200">Filter aktif:</span>
 
-                                @if(request('kategori'))
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300">
-                                        <span class="hidden sm:inline">Kategori: </span>{{ request('kategori') }}
-                                        <a href="{{ request()->fullUrlWithQuery(['kategori' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-emerald-300 text-sm">×</a>
-                                    </span>
-                                @endif
+                            @if(request('search'))
+                            <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-indigo-900/30 text-indigo-300">
+                                <span class="hidden sm:inline">Pencarian: </span>"{{ \Illuminate\Support\Str::limit(request('search'), 20) }}"
+                                <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-indigo-300 text-sm">×</a>
+                            </span>
+                            @endif
 
-                                @if(request('bidang'))
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-300">
-                                        <span class="hidden sm:inline">Bidang: </span>{{ Str::limit(request('bidang'), 15) }}
-                                        <a href="{{ request()->fullUrlWithQuery(['bidang' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-purple-300 text-sm">×</a>
-                                    </span>
-                                @endif
+                            @if(request('kategori'))
+                            <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-emerald-900/30 text-emerald-300">
+                                <span class="hidden sm:inline">Kategori: </span>{{ request('kategori') }}
+                                <a href="{{ request()->fullUrlWithQuery(['kategori' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-emerald-300 text-sm">×</a>
+                            </span>
+                            @endif
 
-                                @if(request('tanggal_acara'))
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-yellow-900/30 text-yellow-300">
-                                        <span class="hidden sm:inline">Waktu: </span>{{ ucfirst(str_replace('_', ' ', request('tanggal_acara'))) }}
-                                        <a href="{{ request()->fullUrlWithQuery(['tanggal_acara' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-yellow-300 text-sm">×</a>
-                                    </span>
-                                @endif
+                            @if(request('bidang'))
+                            <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-300">
+                                <span class="hidden sm:inline">Bidang: </span>{{ \Illuminate\Support\Str::limit(request('bidang'), 15) }}
+                                <a href="{{ request()->fullUrlWithQuery(['bidang' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-purple-300 text-sm">×</a>
+                            </span>
+                            @endif
 
-                                @if(request('funding_min') || request('funding_max'))
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-red-900/30 text-red-300">
-                                        <span class="hidden sm:inline">Dana: </span>
-                                        @if(request('funding_min'))Rp {{ number_format(request('funding_min'), 0, ',', '.') }}@endif
-                                        @if(request('funding_min') && request('funding_max')) - @endif
-                                        @if(request('funding_max'))Rp {{ number_format(request('funding_max'), 0, ',', '.') }}@endif
-                                        <a href="{{ request()->fullUrlWithQuery(['funding_min' => null, 'funding_max' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-red-300 text-sm">×</a>
-                                    </span>
-                                @endif
+                            @if(request('tanggal_acara'))
+                            <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-yellow-900/30 text-yellow-300">
+                                <span class="hidden sm:inline">Waktu: </span>{{ ucfirst(str_replace('_', ' ', request('tanggal_acara'))) }}
+                                <a href="{{ request()->fullUrlWithQuery(['tanggal_acara' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-yellow-300 text-sm">×</a>
+                            </span>
+                            @endif
 
-                                @if(request('sort') && request('sort') != 'terbaru')
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-indigo-900/30 text-indigo-300">
-                                        <span class="hidden sm:inline">Urutan: </span>{{ ucfirst(str_replace('_', ' ', request('sort'))) }}
-                                        <a href="{{ request()->fullUrlWithQuery(['sort' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-indigo-300 text-sm">×</a>
-                                    </span>
-                                @endif
-                            </div>
+                            @if(request('funding_min') || request('funding_max'))
+                            <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-red-900/30 text-red-300">
+                                <span class="hidden sm:inline">Dana: </span>
+                                @if(request('funding_min'))Rp {{ number_format(request('funding_min'), 0, ',', '.') }}@endif
+                                @if(request('funding_min') && request('funding_max')) - @endif
+                                @if(request('funding_max'))Rp {{ number_format(request('funding_max'), 0, ',', '.') }}@endif
+                                <a href="{{ request()->fullUrlWithQuery(['funding_min' => null, 'funding_max' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-red-300 text-sm">×</a>
+                            </span>
+                            @endif
+
+                            @if(request('sort') && request('sort') != 'terbaru')
+                            <span class="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium bg-indigo-900/30 text-indigo-300">
+                                <span class="hidden sm:inline">Urutan: </span>{{ ucfirst(str_replace('_', ' ', request('sort'))) }}
+                                <a href="{{ request()->fullUrlWithQuery(['sort' => null]) }}" class="ml-1.5 sm:ml-2 hover:text-indigo-300 text-sm">×</a>
+                            </span>
+                            @endif
                         </div>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -239,64 +239,64 @@
                             </svg>
                             <h3 class="text-base sm:text-lg font-semibold text-white">
                                 @if(request()->hasAny(['search', 'kategori', 'bidang', 'tanggal_acara', 'funding_min', 'funding_max']))
-                                    <span class="hidden sm:inline">Hasil Filter ({{ $proposals->total() }} proposal)</span>
-                                    <span class="sm:hidden">Hasil ({{ $proposals->total() }})</span>
+                                <span class="hidden sm:inline">Hasil Filter ({{ $proposals->total() }} proposal)</span>
+                                <span class="sm:hidden">Hasil ({{ $proposals->total() }})</span>
                                 @else
-                                    <span class="hidden sm:inline">Semua Proposal Tersedia ({{ $proposals->total() }} proposal)</span>
-                                    <span class="sm:hidden">Semua Proposal ({{ $proposals->total() }})</span>
+                                <span class="hidden sm:inline">Semua Proposal Tersedia ({{ $proposals->total() }} proposal)</span>
+                                <span class="sm:hidden">Semua Proposal ({{ $proposals->total() }})</span>
                                 @endif
                             </h3>
                         </div>
 
                         @if($proposals->count() > 0)
-                            <div class="text-xs sm:text-sm text-gray-400">
-                                <span class="hidden sm:inline">Menampilkan </span>{{ $proposals->firstItem() }}-{{ $proposals->lastItem() }} dari {{ $proposals->total() }}<span class="hidden sm:inline"> proposal</span>
-                            </div>
+                        <div class="text-xs sm:text-sm text-gray-400">
+                            <span class="hidden sm:inline">Menampilkan </span>{{ $proposals->firstItem() }}-{{ $proposals->lastItem() }} dari {{ $proposals->total() }}<span class="hidden sm:inline"> proposal</span>
+                        </div>
                         @endif
                     </div>
 
                     <!-- Proposals Grid -->
                     @if($proposals->count() > 0)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                            @foreach ($proposals as $proposal)
-                                <x-proposal-card :proposal="$proposal" />
-                            @endforeach
-                        </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        @foreach ($proposals as $proposal)
+                        <x-proposal-card :proposal="$proposal" />
+                        @endforeach
+                    </div>
 
-                        <!-- Pagination -->
-                        <div class="mt-6 sm:mt-8">
-                            {{ $proposals->links() }}
-                        </div>
+                    <!-- Pagination -->
+                    <div class="mt-6 sm:mt-8">
+                        {{ $proposals->links() }}
+                    </div>
                     @else
-                        <!-- Empty State -->
-                        <div class="text-center py-8 sm:py-12">
-                            <div class="mx-auto w-16 h-16 sm:w-24 sm:h-24 bg-white/10 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-                                <svg class="w-8 h-8 sm:w-12 sm:h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                            </div>
-                            @if(request()->hasAny(['search', 'kategori', 'bidang', 'tanggal_acara', 'funding_min', 'funding_max']))
-                                <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Tidak ada proposal ditemukan</h3>
-                                <p class="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4 px-4">
-                                    Tidak ada proposal yang cocok dengan filter yang Anda pilih.
-                                </p>
-                                <div class="space-y-2">
-                                    <p class="text-xs sm:text-sm text-gray-400">Coba ubah filter atau:</p>
-                                    <a href="{{ route('sponsor.proposals.index') }}"
-                                       class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 btn-gradient text-white rounded-lg transition-colors duration-200 text-sm sm:text-base">
-                                        <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                                        </svg>
-                                        Lihat Semua Proposal
-                                    </a>
-                                </div>
-                            @else
-                                <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Belum ada proposal tersedia</h3>
-                                <p class="text-sm sm:text-base text-gray-300 px-4">
-                                    Saat ini belum ada proposal yang tersedia untuk dilihat.
-                                </p>
-                            @endif
+                    <!-- Empty State -->
+                    <div class="text-center py-8 sm:py-12">
+                        <div class="mx-auto w-16 h-16 sm:w-24 sm:h-24 bg-white/10 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                            <svg class="w-8 h-8 sm:w-12 sm:h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
                         </div>
+                        @if(request()->hasAny(['search', 'kategori', 'bidang', 'tanggal_acara', 'funding_min', 'funding_max']))
+                        <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Tidak ada proposal ditemukan</h3>
+                        <p class="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4 px-4">
+                            Tidak ada proposal yang cocok dengan filter yang Anda pilih.
+                        </p>
+                        <div class="space-y-2">
+                            <p class="text-xs sm:text-sm text-gray-400">Coba ubah filter atau:</p>
+                            <a href="{{ route('sponsor.proposals.index') }}"
+                                class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 btn-gradient text-white rounded-lg transition-colors duration-200 text-sm sm:text-base">
+                                <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                                </svg>
+                                Lihat Semua Proposal
+                            </a>
+                        </div>
+                        @else
+                        <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Belum ada proposal tersedia</h3>
+                        <p class="text-sm sm:text-base text-gray-300 px-4">
+                            Saat ini belum ada proposal yang tersedia untuk dilihat.
+                        </p>
+                        @endif
+                    </div>
                     @endif
                 </div>
             </div>

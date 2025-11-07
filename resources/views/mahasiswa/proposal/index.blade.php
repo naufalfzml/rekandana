@@ -24,7 +24,7 @@
                                 </span>
                             </div>
                             @if(auth()->user()->direct_proposal_quota <= 0)
-                                <p class="mt-2 text-xs text-gray-400">
+                                <p class="mt-2 text-[11px] sm:text-xs text-gray-400">
                                     💡 Premium coming soon!
                                 </p>
                             @endif
@@ -55,20 +55,20 @@
                                         <td class="px-4 lg:px-6 py-4 whitespace-nowrap">
                                             @if($proposal->status == 'approved')
                                                 @if($proposal->deals->isnotEmpty())
-                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-cyan-900/30 text-cyan-300">
+                                                    <span class="px-2 inline-flex text-[11px] sm:text-xs leading-5 font-semibold rounded-full bg-cyan-900/30 text-cyan-300">
                                                         Ada Tawaran
                                                     </span>
                                                 @else
-                                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-900/30 text-emerald-300">
+                                                    <span class="px-2 inline-flex text-[11px] sm:text-xs leading-5 font-semibold rounded-full bg-emerald-900/30 text-emerald-300">
                                                         Disetujui oleh Admin
                                                     </span>
                                                 @endif
                                             @elseif($proposal->status == 'rejected')
-                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-900/30 text-red-300">
+                                                 <span class="px-2 inline-flex text-[11px] sm:text-xs leading-5 font-semibold rounded-full bg-red-900/30 text-red-300">
                                                     Ditolak oleh Admin
                                                 </span>
                                             @else
-                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-900/30 text-yellow-300">
+                                                 <span class="px-2 inline-flex text-[11px] sm:text-xs leading-5 font-semibold rounded-full bg-yellow-900/30 text-yellow-300">
                                                     Pending
                                                 </span>
                                             @endif
