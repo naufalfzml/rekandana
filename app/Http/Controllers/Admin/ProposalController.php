@@ -24,6 +24,16 @@ class ProposalController extends Controller
 
         $proposal->user->notify(new ProposalStatusUpdated('disetujui', $proposal->title));
 
+        // Jika ini direct proposal, kirim email ke sponsor yang ditargetkan
+        if ($proposal->is_direct) {
+            $invitation = $proposal->invitation; // Pastikan ada relasi di model
+            if ($invitation && $invitation->sponsor) {
+                \Mail::to($invitation->sponsor->email)->send(
+                    new \App\Mail\ProposalInvitationSent($proposal, $proposal->user, $invitation->sponsor)
+                );
+            }
+        }
+
         return back()->with('success', "Proposal '{$proposal->title}' berhasil disetujui! Notifikasi email telah dikirim ke {$proposal->user->name}.");
     }
 

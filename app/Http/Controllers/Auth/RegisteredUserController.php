@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
                 'no_hp' => ['required', 'string', 'max:15'],
                 'university' => ['required', 'string', 'max:255'],
                 'nim' => ['required', 'string', 'max:255'],
-                'ktm' => ['required', 'file', 'mimes:png,jpg,pdf', 'max:2048'],
+                'ktm' => ['required', 'file', 'mimes:pdf', 'max:2048'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
         } elseif ($role === 'sponsor') {

@@ -1,17 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-100 leading-tight">
-                Detail Proposal
-            </h2>
-        </div>
+        <h2 class="font-semibold text-lg sm:text-xl text-gray-100 leading-tight">
+            Detail Proposal
+        </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-6 sm:py-8 md:py-10 lg:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Pesan Sukses -->
             @if(session('success'))
-                <div class="mb-4 p-4 bg-emerald-900/30 text-emerald-300 rounded-lg">
+                <div class="mb-3 sm:mb-4 p-3 sm:p-4 bg-emerald-900/30 text-emerald-300 rounded-lg text-sm sm:text-base">
                     {{ session('success') }}
                 </div>
             @endif
@@ -20,14 +18,14 @@
                 $backUrl = request()->query('back')
                     ?: (request('from') === 'history' ? route('admin.proposals.history') : route('admin.proposals.index'));
             @endphp
-            <a href="{{ $backUrl }}"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-600 text-gray-100 rounded-lg transition-colors mb-4">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="window.history.back()"
+                    class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-slate-700/50 hover:bg-slate-600 text-gray-100 rounded-lg transition-colors mb-3 sm:mb-4 text-sm sm:text-base">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
                 <span class="font-semibold">Kembali</span>
-            </a>
-            <div class="glass-card neon-border overflow-hidden sm:rounded-xl">
+            </button>
+            <div class="glass-card neon-border overflow-hidden rounded-xl">
                 <div class="p-6 text-gray-100">
                     <!-- Header Proposal -->
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 rounded-xl mb-6">

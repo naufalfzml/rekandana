@@ -32,14 +32,14 @@ class ReferralCodeController extends Controller
     {
         $request->validate([
             'code' => ['required', 'string', 'max:255', 'unique:referral_codes,code'],
-            'is_active' => ['boolean'],
+            'is_active' => ['nullable', 'boolean'],
             'max_uses' => ['nullable', 'integer', 'min:1'],
             'expires_at' => ['nullable', 'date', 'after:now'],
         ]);
 
         ReferralCode::create([
             'code' => strtoupper($request->code),
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->boolean('is_active'),
             'max_uses' => $request->max_uses,
             'expires_at' => $request->expires_at,
         ]);
@@ -63,14 +63,14 @@ class ReferralCodeController extends Controller
     {
         $request->validate([
             'code' => ['required', 'string', 'max:255', 'unique:referral_codes,code,' . $referralCode->id],
-            'is_active' => ['boolean'],
+            'is_active' => ['nullable', 'boolean'],
             'max_uses' => ['nullable', 'integer', 'min:1'],
             'expires_at' => ['nullable', 'date'],
         ]);
 
         $referralCode->update([
             'code' => strtoupper($request->code),
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->boolean('is_active'),
             'max_uses' => $request->max_uses,
             'expires_at' => $request->expires_at,
         ]);

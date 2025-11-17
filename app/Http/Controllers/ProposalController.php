@@ -111,7 +111,7 @@ class ProposalController extends Controller
             $sponsor = User::find($request->target_sponsor_id);
             $sponsorName = $sponsor ? $sponsor->company_name : 'sponsor';
 
-            return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan langsung ke {$sponsorName}! Proposal ini hanya akan terlihat oleh sponsor tersebut. Sisa kuota direct proposal: {$remainingQuota}");
+            return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan langsung ke {$sponsorName}! Proposal akan direview oleh admin terlebih dahulu, kemudian sponsor akan menerima notifikasi email. Sisa kuota direct proposal: {$remainingQuota}");
         }
 
         return redirect()->route('dashboard')->with('success', "Proposal '{$request->title}' berhasil diajukan! Proposal Anda akan direview oleh tim admin dan kemudian akan muncul di daftar proposal untuk semua sponsor.");

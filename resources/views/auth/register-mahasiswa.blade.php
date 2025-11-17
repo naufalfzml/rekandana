@@ -56,7 +56,7 @@
                         </label>
                         <p>atau drag and drop</p>
                     </div>
-                    <p class="text-xs text-gray-400">PNG, JPG atau PDF (Maks. 2MB)</p>
+                    <p class="text-xs text-gray-400">PDF (Maks. 2MB)</p>
                     <p id="ktm-file-name" class="text-xs sm:text-sm text-gray-200 font-semibold mt-2 break-all px-2"></p>
                 </div>
             </div>

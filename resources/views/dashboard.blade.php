@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+        <h2 class="font-semibold text-lg sm:text-xl text-gray-100 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
     <div class="py-6 sm:py-8 md:py-10 lg:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-card neon-border overflow-hidden rounded-lg sm:rounded-xl">
+            <div class="glass-card neon-border overflow-hidden rounded-xl">
                 <div class="p-4 sm:p-6 md:p-8 text-gray-100">
 
                     @if(auth()->user()->role === 'mahasiswa')

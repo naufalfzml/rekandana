@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+        <h2 class="font-semibold text-lg sm:text-xl text-gray-100 leading-tight">
             Cari Proposal
         </h2>
     </x-slot>
@@ -8,7 +8,7 @@
     <div class="py-6 sm:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Search & Filter Section -->
-            <div class="glass-card neon-border overflow-hidden sm:rounded-xl mb-6 sm:mb-8">
+            <div class="glass-card neon-border overflow-hidden rounded-xl mb-6 sm:mb-8">
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center mb-4 sm:mb-6">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,7 +229,7 @@
             </div>
 
             <!-- Results Section -->
-            <div class="glass-card neon-border overflow-hidden sm:rounded-xl">
+            <div class="glass-card neon-border overflow-hidden rounded-xl">
                 <div class="p-4 sm:p-6">
                     <!-- Results Header -->
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 sm:mb-6">
