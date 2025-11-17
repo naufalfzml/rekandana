@@ -22,7 +22,8 @@
 
                         <div class="mt-4">
                             <label class="flex items-center">
-                                <input type="checkbox" name="is_active" class="rounded border-white/10 bg-slate-900/50 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('is_active', $referralCode->is_active) ? 'checked' : '' }}>
+                                <input type="hidden" name="is_active" value="0">
+                                <input type="checkbox" name="is_active" value="1" class="rounded border-white/10 bg-slate-900/50 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('is_active', $referralCode->is_active) ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-300">Aktifkan kode ini</span>
                             </label>
                         </div>

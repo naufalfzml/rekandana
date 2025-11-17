@@ -32,7 +32,7 @@ class ReferralCodeController extends Controller
     {
         $request->validate([
             'code' => ['required', 'string', 'max:255', 'unique:referral_codes,code'],
-            'is_active' => ['boolean'],
+            'is_active' => ['nullable', 'boolean'],
             'max_uses' => ['nullable', 'integer', 'min:1'],
             'expires_at' => ['nullable', 'date', 'after:now'],
         ]);
@@ -53,6 +53,7 @@ class ReferralCodeController extends Controller
      */
     public function edit(ReferralCode $referralCode)
     {
+        $referralCode->loadCount('users');
         return view('admin.referral-codes.edit', compact('referralCode'));
     }
 
@@ -63,7 +64,7 @@ class ReferralCodeController extends Controller
     {
         $request->validate([
             'code' => ['required', 'string', 'max:255', 'unique:referral_codes,code,' . $referralCode->id],
-            'is_active' => ['boolean'],
+            'is_active' => ['nullable', 'boolean'],
             'max_uses' => ['nullable', 'integer', 'min:1'],
             'expires_at' => ['nullable', 'date'],
         ]);
