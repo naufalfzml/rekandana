@@ -3,15 +3,16 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewDealInitiated extends Notification
+class NewDealInitiated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $proposal;
-    protected $sponsor;
+    public $proposal;
+    public $sponsor;
 
     public function __construct($proposal, $sponsor)
     {
@@ -27,11 +28,11 @@ class NewDealInitiated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Deal Baru Dimulai untuk Proposal Anda')
-                    ->greeting('Halo ' . $notifiable->name . '!')
-                    ->line('Kabar baik! Sponsor "' . $this->sponsor->company_name . '" tertarik dengan proposal Anda: "' . $this->proposal->title . '"')
-                    ->line('Mereka telah memulai deal dan akan segera menghubungi Anda.')
-                    ->action('Lihat Proposal', url('/dashboard'))
-                    ->line('Terima kasih telah menggunakan platform kami!');
+            ->subject('🎉 Kabar Gembira! Sponsor Tertarik dengan Proposal Anda')
+            ->view('emails.new-deal-initiated', [
+                'mahasiswa' => $notifiable,
+                'proposal' => $this->proposal,
+                'sponsor' => $this->sponsor
+            ]);
     }
 }

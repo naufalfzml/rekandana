@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
                 'no_hp' => ['required', 'string', 'max:15'],
                 'university' => ['required', 'string', 'max:255'],
                 'nim' => ['required', 'string', 'max:255'],
-                'ktm' => ['required', 'file', 'mimes:png,jpg,pdf', 'max:2048'],
+                'ktm' => ['required', 'file', 'mimes:pdf', 'max:2048'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
         } elseif ($role === 'sponsor') {
@@ -104,6 +104,7 @@ class RegisteredUserController extends Controller
             'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
             'role' => $role,
+            'no_hp' => $request->no_hp,
             'referral_code_id' => $role === 'sponsor' ? $referralCode->id : null,
             'university' => $request->university,
             'nim' => $request->nim,

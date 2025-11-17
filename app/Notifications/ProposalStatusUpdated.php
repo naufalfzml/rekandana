@@ -7,9 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProposalStatusUpdated extends Notification
+class ProposalStatusUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
+
+    public $status;
+    public $proposalTitle;
 
     /**
      * Create a new notification instance.
@@ -35,20 +38,17 @@ class ProposalStatusUpdated extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $subject = "Status Proposal Kamu Telah Diperbarui";
-        $greeting = "Halo, " . $notifiable->name . "!";
-        $line = "Kabar baik! Proposal kamu yang berjudul **\"" . $this->proposalTitle . "\"** telah **" . $this->status . "** oleh Admin. Proposal akan masuk ke dashboard Sponsor.";
-
-        if ($this->status === 'ditolak') {
-            $line = "Mohon maaf, proposal kamu yang berjudul **\"" . $this->proposalTitle . "\"** telah **" . $this->status . "**.";
-        }
+        $subject = $this->status === 'disetujui'
+            ? "🎉 Selamat! Proposal Anda Disetujui"
+            : "Status Proposal Anda Diperbarui";
 
         return (new MailMessage)
-                    ->subject($subject)
-                    ->greeting($greeting)
-                    ->line($line)
-                    ->action('Lihat Dashboard', url('/dashboard'))
-                    ->line('Terima kasih telah menggunakan platform kami!');
+            ->subject($subject)
+            ->view('emails.proposal-status-updated', [
+                'mahasiswa' => $notifiable,
+                'status' => $this->status,
+                'proposalTitle' => $this->proposalTitle
+            ]);
     }
 
     /**

@@ -1,6 +1,6 @@
 @props(['proposal'])
 
-<div class="overflow-hidden sm:rounded-xl glass-card neon-border">
+<div class="overflow-hidden rounded-xl glass-card neon-border">
     <div class="p-6">
         <h3 class="text-lg font-bold text-white">
             <a href="{{ route('sponsor.proposals.show', $proposal) }}" class="hover:text-indigo-300">

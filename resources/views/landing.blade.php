@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +12,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="font-sans antialiased bg-app text-gray-100">
 
+<body class="font-sans antialiased bg-app text-gray-100 overflow-x-hidden">
     @include('layouts.navigation')
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
         <!-- Decorative orbs -->
         <div class="orb orb--violet w-64 h-64 -z-10 absolute" style="top:-40px; right:-80px;"></div>
         <div class="orb orb--cyan w-72 h-72 -z-10 absolute" style="bottom:-60px; left:-80px;"></div>
@@ -28,7 +28,7 @@
                 <!-- Badge -->
                 <div class="inline-flex items-center px-3 py-1 rounded-full text-sm badge-soft">
                     <i class="fas fa-check-circle mr-2 opacity-90"></i>
-                    Platform #1 untuk Sponsorship di Indonesia
+                    Platform Terbaik untuk Sponsorship di Indonesia
                 </div>
 
                 <!-- Main Heading -->
@@ -52,32 +52,17 @@
                         Mulai Sekarang
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <button class="btn-ghost px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center">
-                        <i class="fas fa-play mr-2"></i>
-                        Lihat Demo
-                    </button>
                 </div>
             </div>
 
             <!-- Right Content - Image/Illustration -->
             <div class="relative">
-                <div class="glass-card inner-outline rounded-3xl p-8 card-hover">
+                <div class="glass-card inner-outline rounded-xl card-hover">
                     <!-- Placeholder for illustration -->
-                    <div class="aspect-square bg-slate-900/40 rounded-2xl shadow-lg flex items-center justify-center">
-                        <div class="text-center space-y-4">
-                            <div class="w-24 h-24 bg-gradient-to-br from-violet-600 to-cyan-500 rounded-full mx-auto flex items-center justify-center shadow-lg">
-                                <i class="fas fa-handshake text-white text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white">Kolaborasi Terbaik</h3>
-                            <p class="text-gray-300">Menghubungkan sponsor dengan proposal berkualitas</p>
-                        </div>
-                    </div>
+                        <img src="{{ asset('storage/shake-hand.png') }}" alt="" 
+                        class="bg-slate-900/40 rounded-xl shadow-lg flex items-center justify-center">
                 </div>
                 
-                <!-- Floating tiles with glow -->
-                <div class="absolute -top-6 -right-6 w-16 h-16 rounded-xl flex items-center justify-center shadow-xl rotate-12" style="background:linear-gradient(135deg,#f59e0b,#fb923c)">
-                    <i class="fas fa-trophy text-white text-xl"></i>
-                </div>
                 <div class="absolute -bottom-6 -left-6 w-14 h-14 rounded-xl flex items-center justify-center shadow-xl -rotate-6" style="background:linear-gradient(135deg,#22c55e,#10b981)">
                     <i class="fas fa-check text-white"></i>
                 </div>
@@ -89,60 +74,61 @@
     <section class="py-20" id="fitur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-white mb-4">Fitur Unggulan</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Fitur Unggulan</h2>
                 <p class="text-xl text-gray-300 max-w-2xl mx-auto">
                     Dilengkapi dengan fitur-fitur canggih untuk memaksimalkan peluang keberhasilan Anda
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div class="text-center p-8 glass-card rounded-xl card-hover border border-white/10">
                     <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-search text-cyan-400 text-2xl"></i>
+                        <i class="fas fa-paper-plane text-cyan-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-4">Smart Matching</h3>
-                    <p class="text-gray-300">Temukan sponsor yang tepat dengan sistem pencarian berbasis AI</p>
+                    <h3 class="text-xl font-semibold text-white mb-4">Direct Proposal</h3>
+                    <p class="text-gray-300">Kirim proposal langsung ke sponsor pilihan Anda dengan sistem direct yang eksklusif</p>
                 </div>
 
                 <div class="text-center p-8 glass-card rounded-xl card-hover border border-white/10">
                     <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-shield-alt text-emerald-400 text-2xl"></i>
+                        <i class="fas fa-filter text-violet-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-4">Verifikasi Terpercaya</h3>
-                    <p class="text-gray-300">Data dan transaksi Anda dilindungi dengan enkripsi tingkat tinggi</p>
+                    <h3 class="text-xl font-semibold text-white mb-4">Advanced Filter</h3>
+                    <p class="text-gray-300">Filter proposal berdasarkan kategori, bidang, tanggal acara, dan target dana</p>
                 </div>
 
                 <div class="text-center p-8 glass-card rounded-xl card-hover border border-white/10">
                     <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-clock text-violet-400 text-2xl"></i>
+                        <i class="fas fa-user-check text-emerald-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-4">Proses Cepat</h3>
-                    <p class="text-gray-300">Dapatkan respon dari sponsor dalam waktu kurang dari 24 jam</p>
+                    <h3 class="text-xl font-semibold text-white mb-4">Admin Verification</h3>
+                    <p class="text-gray-300">Setiap proposal diverifikasi oleh admin untuk menjaga kualitas dan keamanan</p>
                 </div>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center p-8 glass-card rounded-xl card-hover border border-white/10">
                     <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-search text-cyan-400 text-2xl"></i>
+                        <i class="fas fa-bookmark text-yellow-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-4">Pencarian Cerdas</h3>
-                    <p class="text-gray-300">Temukan sponsor yang tepat dengan sistem pencarian berbasis AI</p>
+                    <h3 class="text-xl font-semibold text-white mb-4">Save & Organize</h3>
+                    <p class="text-gray-300">Simpan proposal favorit dan kelola daftar minat sponsorship Anda</p>
                 </div>
 
                 <div class="text-center p-8 glass-card rounded-xl card-hover border border-white/10">
                     <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-shield-alt text-emerald-400 text-2xl"></i>
+                        <i class="fas fa-handshake text-pink-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-4">Keamanan Terjamin</h3>
-                    <p class="text-gray-300">Data dan transaksi Anda dilindungi dengan enkripsi tingkat tinggi</p>
+                    <h3 class="text-xl font-semibold text-white mb-4">Multi-Sponsor Deal</h3>
+                    <p class="text-gray-300">Satu proposal dapat di-deal oleh banyak sponsor untuk kolaborasi maksimal</p>
                 </div>
 
                 <div class="text-center p-8 glass-card rounded-xl card-hover border border-white/10">
                     <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-clock text-violet-400 text-2xl"></i>
+                        <i class="fas fa-bell text-orange-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white mb-4">Proses Cepat</h3>
-                    <p class="text-gray-300">Dapatkan respon dari sponsor dalam waktu kurang dari 24 jam</p>
+                    <h3 class="text-xl font-semibold text-white mb-4">Real-time Notification</h3>
+                    <p class="text-gray-300">Notifikasi email otomatis untuk setiap update status proposal dan deal</p>
                 </div>
             </div>
         </div>
@@ -153,8 +139,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-white mb-4">Cara Kerja Rekandana</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Cara Kerja Rekandana</h2>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
                     Proses yang sederhana dan efektif untuk menghubungkan proposal dengan sponsor yang tepat
                 </p>
             </div>
@@ -176,8 +162,8 @@
                             <span class="text-white font-bold text-sm">1</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Daftar & Verifikasi</h4>
-                            <p class="text-gray-300">Buat akun dan verifikasi status mahasiswa dengan KTM</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Daftar & Verifikasi Email</h4>
+                            <p class="text-gray-300">Buat akun dengan upload KTM, lalu verifikasi email Anda</p>
                         </div>
                     </div>
 
@@ -187,8 +173,8 @@
                             <span class="text-white font-bold text-sm">2</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Buat Proposal</h4>
-                            <p class="text-gray-300">Gunakan template kami untuk membuat proposal yang menarik</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Upload Proposal</h4>
+                            <p class="text-gray-300">Upload proposal Anda, pilih kirim umum atau direct ke sponsor tertentu</p>
                         </div>
                     </div>
 
@@ -198,8 +184,8 @@
                             <span class="text-white font-bold text-sm">3</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Submit & Promosi</h4>
-                            <p class="text-gray-300">Kirim proposal dan dapatkan eksposur ke ribuan perusahaan</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Menunggu Approval Admin</h4>
+                            <p class="text-gray-300">Admin akan review dan approve proposal Anda, notifikasi dikirim via email</p>
                         </div>
                     </div>
 
@@ -209,8 +195,8 @@
                             <span class="text-white font-bold text-sm">4</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Dapatkan Sponsor</h4>
-                            <p class="text-gray-300">Terima tawaran sponsorship dan mulai kolaborasi</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Dihubungi Sponsor</h4>
+                            <p class="text-gray-300">Sponsor yang tertarik akan memulai deal dan menghubungi Anda langsung</p>
                         </div>
                     </div>
                 </div>
@@ -230,8 +216,8 @@
                             <span class="text-white font-bold text-sm">1</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Daftar Perusahaan</h4>
-                            <p class="text-gray-300">Registrasi dengan email bisnis dan verifikasi perusahaan</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Daftar & Verifikasi Email</h4>
+                            <p class="text-gray-300">Registrasi sebagai sponsor dan verifikasi email perusahaan Anda</p>
                         </div>
                     </div>
 
@@ -241,8 +227,8 @@
                             <span class="text-white font-bold text-sm">2</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Jelajahi Proposal</h4>
-                            <p class="text-gray-300">Cari proposal yang sesuai dengan target market Anda</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Browse & Filter Proposal</h4>
+                            <p class="text-gray-300">Lihat proposal umum atau cek proposal direct yang dikirim khusus ke Anda</p>
                         </div>
                     </div>
 
@@ -252,8 +238,8 @@
                             <span class="text-white font-bold text-sm">3</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Filter & Analisis</h4>
-                            <p class="text-gray-300">Gunakan filter canggih untuk menemukan opportunity terbaik</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Simpan atau Mulai Deal</h4>
+                            <p class="text-gray-300">Bookmark proposal menarik atau langsung mulai deal dengan mahasiswa</p>
                         </div>
                     </div>
 
@@ -263,21 +249,11 @@
                             <span class="text-white font-bold text-sm">4</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Mulai Sponsorship</h4>
-                            <p class="text-gray-300">Hubungi penyelenggara dan mulai kemitraan strategis</p>
+                            <h4 class="text-lg font-semibold text-white mb-2">Hubungi & Kolaborasi</h4>
+                            <p class="text-gray-300">Akses kontak mahasiswa setelah deal dan mulai kemitraan strategis</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- CTA Button -->
-            <div class="text-center mt-16">
-                <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-4 btn-gradient text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
-                    <span>Mulai gunakan Rekandana?</span>
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                    </svg>
-                </a>
             </div>
         </div>
     </section>
@@ -287,8 +263,8 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-                <p class="text-xl text-gray-300">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg md:text-xl text-gray-300">
                     Temukan jawaban untuk pertanyaan yang sering diajukan
                 </p>
             </div>
@@ -301,7 +277,7 @@
                         @click="activeIndex = activeIndex === 0 ? null : 0"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apa itu platform Rekandana?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apa itu platform Rekandana?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 0 }"
@@ -317,7 +293,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Platform Rekandana adalah platform digital yang mempertemukan mahasiswa atau organisasi kampus dengan badan usaha yang ingin memberikan dukungan sponsorship dalam bentuk barang, jasa, atau dana.
                         </p>
                     </div>
@@ -329,7 +305,7 @@
                         @click="activeIndex = activeIndex === 1 ? null : 1"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Bagaimana cara mengajukan proposal?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Bagaimana cara mengajukan proposal?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 1 }"
@@ -345,7 +321,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Cukup buat akun, isi profil, unggah proposal sesuai format yang disediakan, lalu pilih apakah ingin mengajukannya secara publik (dilihat semua mitra) atau direct ke perusahaan tertentu.
                         </p>
                     </div>
@@ -357,7 +333,7 @@
                         @click="activeIndex = activeIndex === 2 ? null : 2"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah pengajuan proposal harus membayar?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah pengajuan proposal harus membayar?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 2 }"
@@ -373,7 +349,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Tidak, pengajuan proposal dasar tidak dikenakan biaya. Namun, ada fitur premium untuk meningkatkan visibilitas proposal kamu kepada lebih banyak perusahaan.
                         </p>
                     </div>
@@ -385,7 +361,7 @@
                         @click="activeIndex = activeIndex === 3 ? null : 3"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah proposal saya aman dan tidak disalahgunakan?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah proposal saya aman dan tidak disalahgunakan?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 3 }"
@@ -401,7 +377,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Ya. Semua proposal hanya dapat dilihat oleh perusahaan mitra terverifikasi dan tidak dapat diunduh tanpa izin.
                         </p>
                     </div>
@@ -413,7 +389,7 @@
                         @click="activeIndex = activeIndex === 4 ? null : 4"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah platform mengambil komisi dari transaksi sponsorship?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah platform mengambil komisi dari transaksi sponsorship?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 4 }"
@@ -429,7 +405,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Tidak. Kami tidak mengambil komisi dari transaksi antara perusahaan dan pengaju. Platform kami hanya menyediakan ruang dan sistem penghubung.
                         </p>
                     </div>
@@ -441,7 +417,7 @@
                         @click="activeIndex = activeIndex === 5 ? null : 5"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Bagaimana jika perusahaan tertarik dengan proposal saya?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Bagaimana jika perusahaan tertarik dengan proposal saya?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 5 }"
@@ -457,7 +433,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Jika perusahaan tertarik, platform akan menampilkan kontak kamu kepada perusahaan tersebut. Perusahaan dapat langsung menghubungi kamu untuk pembahasan lebih lanjut.
                         </p>
                     </div>
@@ -469,7 +445,7 @@
                         @click="activeIndex = activeIndex === 6 ? null : 6"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Apakah sponsorship harus dalam bentuk uang tunai?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Apakah sponsorship harus dalam bentuk uang tunai?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 6 }"
@@ -485,7 +461,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Tidak harus. Perusahaan dapat memberikan dukungan dalam bentuk barang, jasa, atau fasilitas lain sesuai kebutuhan kegiatan.
                         </p>
                     </div>
@@ -497,7 +473,7 @@
                         @click="activeIndex = activeIndex === 7 ? null : 7"
                         class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
                     >
-                        <span class="text-lg font-medium text-white">Siapa saja yang bisa mengajukan proposal?</span>
+                        <span class="text:md md:text-lg font-medium text-white">Siapa saja yang bisa mengajukan proposal?</span>
                         <svg
                             class="w-5 h-5 text-gray-400 transition-transform duration-200"
                             :class="{ 'rotate-180': activeIndex === 7 }"
@@ -513,7 +489,7 @@
                         x-collapse
                         class="px-6 pb-5"
                     >
-                        <p class="text-gray-300 leading-relaxed">
+                        <p class="mt-4 text-gray-300 leading-relaxed">
                             Seluruh mahasiswa aktif atau organisasi resmi kampus (seperti BEM, UKM, komunitas, atau panitia kegiatan kampus) yang memiliki kegiatan terencana dan proposal resmi.
                         </p>
                     </div>
@@ -522,53 +498,54 @@
         </div>
     </section>
 
-    <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center mb-4">
-                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold">R</span>
-                        </div>
-                        <span class="ml-2 text-lg font-semibold">Rekandana</span>
+    <!-- CTA Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="rounded-3xl p-12 text-center">
+                <div class="mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Siap Memulai <span class="text-gradient">Kolaborasi</span>?
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                        Bergabunglah dengan ratusan mahasiswa dan perusahaan yang telah sukses berkolaborasi di Rekandana
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-4 btn-gradient text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
+                        <span>Daftar Sekarang</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="mt-8 flex items-center justify-center gap-8 text-sm text-gray-400">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Gratis Mendaftar</span>
                     </div>
-                    <p class="text-gray-400">Platform terpercaya untuk menghubungkan proposal dengan sponsor terbaik di Indonesia.</p>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Aman & Terverifikasi</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Tanpa Komisi</span>
+                    </div>
                 </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Produk</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#fitur" class="hover:text-white">Fitur</a></li>
-                        <li><a href="#carakerja" class="hover:text-white">Cara Kerja</a></li>
-                        <li><a href="#faq" class="hover:text-white">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Perusahaan</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Tentang Kami</a></li>
-                        <li><a href="#" class="hover:text-white">Karir</a></li>
-                        <li><a href="#" class="hover:text-white">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Dukungan</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Bantuan</a></li>
-                        <li><a href="#" class="hover:text-white">Dokumentasi</a></li>
-                        <li><a href="#" class="hover:text-white">Kontak</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Rekandana. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Footer -->
+    @include('layouts.partials.footer')
 
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

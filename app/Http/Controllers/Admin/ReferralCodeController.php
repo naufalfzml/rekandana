@@ -39,7 +39,7 @@ class ReferralCodeController extends Controller
 
         ReferralCode::create([
             'code' => strtoupper($request->code),
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->boolean('is_active'),
             'max_uses' => $request->max_uses,
             'expires_at' => $request->expires_at,
         ]);
@@ -71,7 +71,7 @@ class ReferralCodeController extends Controller
 
         $referralCode->update([
             'code' => strtoupper($request->code),
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->boolean('is_active'),
             'max_uses' => $request->max_uses,
             'expires_at' => $request->expires_at,
         ]);
