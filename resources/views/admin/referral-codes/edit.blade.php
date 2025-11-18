@@ -22,14 +22,9 @@
 
                         <div>
                             <label class="flex items-center">
-<<<<<<< HEAD
                                 <input type="hidden" name="is_active" value="0">
                                 <input type="checkbox" name="is_active" value="1" class="rounded border-white/10 bg-slate-900/50 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('is_active', $referralCode->is_active) ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-300">Aktifkan kode ini</span>
-=======
-                                <input type="checkbox" name="is_active" class="rounded border-white/10 bg-slate-900/50 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('is_active', $referralCode->is_active) ? 'checked' : '' }}>
-                                <span class="ml-2 text-xs sm:text-sm text-gray-300">Aktifkan kode ini</span>
->>>>>>> cab2198570e2091881a34a47dfe27ba593c870e3
                             </label>
                         </div>
 
