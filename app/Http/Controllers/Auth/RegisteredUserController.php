@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
                 'no_hp' => ['required', 'string', 'max:15'],
                 'university' => ['required', 'string', 'max:255'],
                 'nim' => ['required', 'string', 'max:255'],
-                'ktm' => ['required', 'file', 'mimes:pdf', 'max:2048'],
+                'ktm' => ['required', 'file', 'mimes:pdf, jpg, png, jpeg', 'max:5120'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
         } elseif ($role === 'sponsor') {
@@ -69,7 +69,7 @@ class RegisteredUserController extends Controller
                 'no_hp' => ['required', 'string', 'max:15'],
                 'industry' => ['required', 'string'],
                 'website' => ['nullable', 'string', 'url'],
-                'logo' => ['nullable', 'file', 'mimes:png,jpg,svg', 'max:2048'],
+                'logo' => ['nullable', 'file', 'mimes:png,jpg,svg', 'max:5120'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
