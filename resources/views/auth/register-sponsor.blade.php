@@ -24,7 +24,6 @@
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required placeholder="Masukkan nama lengkap PIC" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
-
         <div class="mt-4">
             <x-input-label for="company_name" value="Nama Perusahaan" />
             <x-text-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" :value="old('company_name')" required placeholder="Masukkan nama perusahaan" />
